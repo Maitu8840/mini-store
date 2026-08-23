@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MINI MART | Premium Everyday Essentials</title>
+  <style>
+    :root {
+      --primary: #0f172a;
+      --accent: #2563eb;
+      --accent-hover: #1d4ed8;
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --border: #e2e8f0;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* Top Banner */
+    .top-bar {
+      background: var(--primary);
+      color: #94a3b8;
+      text-align: center;
+      padding: 0.5rem 1rem;
+      font-size: 0.8rem;
+      letter-spacing: 0.05em;
+      font-weight: 500;
+    }
+    .top-bar span { color: #f8fafc; font-weight: 600; }
+
+    /* Sticky Header */
+    header {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      padding: 0.85rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .logo {
+      font-size: 1.4rem;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      color: var(--primary);
+      text-decoration: none;
+    }
+    .logo span { color: var(--accent); }
+
+    .search-bar {
+      flex: 1;
+      max-width: 400px;
+      position: relative;
+    }
+
+    .search-bar input {
+      width: 100%;
+      padding: 0.6rem 1rem 0.6rem 2.2rem;
+      border: 1px solid var(--border);
+      border-radius: 9999px;
+      background: #f1f5f9;
+      font-size: 0.875rem;
+      outline: none;
+      transition: all 0.2s;
+    }
+
+    .search-bar input:focus {
+      background: #fff;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 0.8rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .cart-btn {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 9999px;
+      cursor: pointer;
+      font-size: 0.875rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: background 0.2s;
+    }
+    .cart-btn:hover { background: var(--accent); }
+
+    .cart-badge {
+      background: var(--accent);
+      color: white;
+      font-size: 0.75rem;
+      padding: 2px 7px;
+      border-radius: 9999px;
+    }
+
+    /* Main Content */
+    main {
+      flex: 1;
+      max-width: 1280px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+    }
+
+    /* Hero Banner */
+    .hero {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: white;
+      border-radius: 16px;
+      padding: 3rem 2rem;
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+    .hero .badge {
+      display: inline-block;
+      background: rgba(37, 99, 235, 0.25);
+      color: #93c5fd;
+      padding: 0.35rem 0.85rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.8rem;
+    }
+    .hero h1 { font-size: 2.4rem; font-weight: 800; margin-bottom: 0.5rem; letter-spacing: -0.02em; }
+    .hero p { color: #94a3b8; font-size: 1rem; max-width: 550px; margin: 0 auto; }
+
+    /* Controls Bar: Filters & Sorting */
+    .catalog-controls {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .filter-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .filter-btn {
+      background: white;
+      border: 1px solid var(--border);
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    .sort-group {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .sort-select {
+      padding: 0.45rem 0.75rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: white;
+      font-size: 0.85rem;
+      outline: none;
+      color: var(--text-main);
+      cursor: pointer;
+    }
+
+    /* Product Grid */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .product-card {
+      background: var(--surface);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s, box-shadow 0.2s;
+      position: relative;
+    }
+
+    .product-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 20px -5px rgba(0, 0, 0, 0.08);
+    }
+
+    .img-wrap {
+      position: relative;
+      width: 100%;
+      height: 260px;
+      background: #f1f5f9;
+      overflow: hidden;
+    }
+
+    .product-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s;
+    }
+
+    .product-card:hover .product-image {
+      transform: scale(1.05);
+    }
+
+    .card-tag {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: rgba(15, 23, 42, 0.85);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 0.25rem 0.55rem;
+      border-radius: 4px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      backdrop-filter: blur(4px);
+    }
+
+    .product-details {
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .product-cat {
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin-bottom: 0.25rem;
+    }
+
+    .product-name {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 0.5rem;
+      line-height: 1.3;
+    }
+
+    .product-price {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-top: auto;
+      margin-bottom: 0.75rem;
+    }
+
+    .add-btn {
+      background: #f8fafc;
+      color: var(--text-main);
+      border: 1px solid var(--border);
+      padding: 0.6rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .add-btn:hover {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    /* Cart Slide-out Drawer */
+    .cart-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 100;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+    .cart-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .cart-drawer {
+      position: fixed;
+      top: 0;
+      right: -420px;
+      width: 100%;
+      max-width: 400px;
+      height: 100%;
+      background: white;
+      z-index: 101;
+      box-shadow: -4px 0 20px rgba(0, 0, 0, 0.15);
+      display: flex;
+      flex-direction: column;
+      transition: right 0.3s ease-in-out;
+    }
+    .cart-drawer.open { right: 0; }
+
+    .drawer-header {
+      padding: 1.25rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .drawer-header h3 { font-size: 1.1rem; font-weight: 700; }
+    .close-btn {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--text-muted);
+    }
+
+    .drawer-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1rem 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .empty-cart-msg {
+      text-align: center;
+      color: var(--text-muted);
+      margin: auto 0;
+      font-size: 0.95rem;
+    }
+
+    .cart-item {
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+      border-bottom: 1px solid #f1f5f9;
+      padding-bottom: 0.75rem;
+    }
+    .cart-item img {
+      width: 50px;
+      height: 50px;
+      border-radius: 6px;
+      object-fit: cover;
+    }
+    .cart-item-info { flex: 1; }
+    .cart-item-info h4 { font-size: 0.85rem; font-weight: 600; }
+    .cart-item-info p { font-size: 0.8rem; color: var(--text-muted); }
+    .cart-item-remove {
+      background: none;
+      border: none;
+      color: #ef4444;
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .drawer-footer {
+      padding: 1.25rem;
+      border-top: 1px solid var(--border);
+      background: #f8fafc;
+    }
+    .subtotal-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+    .checkout-btn {
+      width: 100%;
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 0.8rem;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .checkout-btn:hover { background: var(--accent-hover); }
+
+    /* Toast Notification */
+    #toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: var(--primary);
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 9999px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      z-index: 200;
+    }
+    #toast.show { transform: translateX(-50%) translateY(0); }
+
+    /* Footer */
+    footer {
+      background: white;
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+      margin-top: 4rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar">
+    SUMMER DROPS ARE LIVE &bull; <span>FREE SHIPPING OVER $75</span> &bull; 30-DAY HASSLE-FREE RETURNS
+  </div>
+
+  <header>
+    <a href="#" class="logo">MINI<span>MART</span></a>
+
+    <div class="search-bar">
+      <span class="search-icon">&#128269;</span>
+      <input type="text" id="searchInput" placeholder="Search 40+ styles, jackets, tees..." oninput="handleFilter()" />
+    </div>
+
+    <button class="cart-btn" onclick="toggleCart(true)">
+      <span>&#128722;</span> Cart
+      <span class="cart-badge" id="cartBadge">0</span>
+    </button>
+  </header>
+
+  <main>
+    <section class="hero">
+      <span class="badge">SPRING / SUMMER COLLECTION</span>
+      <h1>Clean Cuts. Everyday Comfort.</h1>
+      <p>Explore over 40 meticulously tailored essentials made with sustainable fabrics, built to outlast trends.</p>
+    </section>
+
+    <div class="catalog-controls">
+      <div class="filter-group">
+        <button class="filter-btn active" onclick="setCategory('All', this)">All Items (<span id="totalCount">0</span>)</button>
+        <button class="filter-btn" onclick="setCategory('Tops', this)">Tops</button>
+        <button class="filter-btn" onclick="setCategory('Bottoms', this)">Bottoms</button>
+        <button class="filter-btn" onclick="setCategory('Outerwear', this)">Outerwear</button>
+        <button class="filter-btn" onclick="setCategory('Footwear', this)">Footwear</button>
+        <button class="filter-btn" onclick="setCategory('Accessories', this)">Accessories</button>
+      </div>
+
+      <div class="sort-group">
+        <label for="sortSelect">Sort by:</label>
+        <select class="sort-select" id="sortSelect" onchange="handleFilter()">
+          <option value="featured">Featured</option>
+          <option value="low-high">Price: Low to High</option>
+          <option value="high-low">Price: High to Low</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="product-grid" id="productGrid"></div>
+  </main>
+
+  <!-- Slide-out Cart Drawer -->
+  <div class="cart-overlay" id="cartOverlay" onclick="toggleCart(false)"></div>
+  <aside class="cart-drawer" id="cartDrawer">
+    <div class="drawer-header">
+      <h3>Your Shopping Bag (<span id="drawerCount">0</span>)</h3>
+      <button class="close-btn" onclick="toggleCart(false)">&times;</button>
+    </div>
+    <div class="drawer-body" id="cartItemsContainer">
+      <div class="empty-cart-msg">Your shopping bag is empty.</div>
+    </div>
+    <div class="drawer-footer">
+      <div class="subtotal-row">
+        <span>Subtotal</span>
+        <span id="cartSubtotal">$0.00</span>
+      </div>
+      <button class="checkout-btn" onclick="checkout()">Proceed to Checkout</button>
+    </div>
+  </aside>
+
+  <div id="toast">Added to bag</div>
+
+  <footer>
+    <p>&copy; 2026 Mini Mart Apparel Ltd. Designed for everyday utility and timeless style.</p>
+  </footer>
+
+  <script>
+    // 44 Unique Catalog Items
+    const products = [
+      // TOPS (1-10)
+      { id: 1, name: "Heavyweight Boxy Tee", category: "Tops", price: 28, tag: "Best Seller", img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=500&auto=format&fit=crop&q=75" },
+      { id: 2, name: "Washed Vintage Graphic Tee", category: "Tops", price: 32, tag: "New", img: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=500&auto=format&fit=crop&q=75" },
+      { id: 3, name: "Relaxed Linen Camp Collar Shirt", category: "Tops", price: 48, tag: "Popular", img: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=500&auto=format&fit=crop&q=75" },
+      { id: 4, name: "Classic French Terry Hoodie", category: "Tops", price: 65, tag: "Essential", img: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=500&auto=format&fit=crop&q=75" },
+      { id: 5, name: "Organic Ribbed Tank Top", category: "Tops", price: 22, tag: "", img: "https://images.unsplash.com/photo-1529374255404-311a2a4f1fd9?w=500&auto=format&fit=crop&q=75" },
+      { id: 6, name: "Chunky Cable Knit Sweater", category: "Tops", price: 72, tag: "Cozy", img: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=500&auto=format&fit=crop&q=75" },
+      { id: 7, name: "Pique Cotton Polo Shirt", category: "Tops", price: 38, tag: "", img: "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=500&auto=format&fit=crop&q=75" },
+      { id: 8, name: "Oversized Flannel Overshirt", category: "Tops", price: 54, tag: "Trending", img: "https://images.unsplash.com/photo-1578587018452-892bacefd3f2?w=500&auto=format&fit=crop&q=75" },
+      { id: 9, name: "Brushed Cotton Oxford Shirt", category: "Tops", price: 45, tag: "", img: "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=500&auto=format&fit=crop&q=75" },
+      { id: 10, name: "Mockneck Long-Sleeve Shirt", category: "Tops", price: 36, tag: "", img: "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=500&auto=format&fit=crop&q=75" },
+
+      // BOTTOMS (11-19)
+      { id: 11, name: "Slim Fit Stretch Chinos", category: "Bottoms", price: 55, tag: "Top Rated", img: "https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=500&auto=format&fit=crop&q=75" },
+      { id: 12, name: "Relaxed Fit Raw Selvedge Denim", category: "Bottoms", price: 88, tag: "Premium", img: "https://images.unsplash.com/photo-1542272604-780c96859f77?w=500&auto=format&fit=crop&q=75" },
+      { id: 13, name: "Everyday Pleated Trousers", category: "Bottoms", price: 64, tag: "", img: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=500&auto=format&fit=crop&q=75" },
+      { id: 14, name: "Utility Cargo Pants", category: "Bottoms", price: 58, tag: "Trending", img: "https://images.unsplash.com/photo-1517445312882-bc9910d016b7?w=500&auto=format&fit=crop&q=75" },
+      { id: 15, name: "Linen Drawstring Shorts", category: "Bottoms", price: 34, tag: "Summer", img: "https://images.unsplash.com/photo-1591195853828-11db59a44f6b?w=500&auto=format&fit=crop&q=75" },
+      { id: 16, name: "Heavy Fleece Sweatpants", category: "Bottoms", price: 49, tag: "", img: "https://images.unsplash.com/photo-1552902865-b72c031ac5ea?w=500&auto=format&fit=crop&q=75" },
+      { id: 17, name: "Tapered Corduroy Trousers", category: "Bottoms", price: 62, tag: "New", img: "https://images.unsplash.com/photo-1584370848010-d7fe6bc767ec?w=500&auto=format&fit=crop&q=75" },
+      { id: 18, name: "Active Running Shorts", category: "Bottoms", price: 29, tag: "", img: "https://images.unsplash.com/photo-1539185441755-769473a23570?w=500&auto=format&fit=crop&q=75" },
+      { id: 19, name: "Wide-Leg Washed Jeans", category: "Bottoms", price: 79, tag: "", img: "https://images.unsplash.com/photo-1560243563-062bfc001d68?w=500&auto=format&fit=crop&q=75" },
+
+      // OUTERWEAR (20-28)
+      { id: 20, name: "Classic Trucker Denim Jacket", category: "Outerwear", price: 82, tag: "Iconic", img: "https://images.unsplash.com/photo-1576995853123-5a10305d93c0?w=500&auto=format&fit=crop&q=75" },
+      { id: 21, name: "Minimalist Wool Overcoat", category: "Outerwear", price: 145, tag: "Luxury", img: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=500&auto=format&fit=crop&q=75" },
+      { id: 22, name: "Insulated Puffer Jacket", category: "Outerwear", price: 110, tag: "Warm", img: "https://images.unsplash.com/photo-1544441893-675973e31985?w=500&auto=format&fit=crop&q=75" },
+      { id: 23, name: "MA-1 Bomber Jacket", category: "Outerwear", price: 95, tag: "Popular", img: "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=500&auto=format&fit=crop&q=75" },
+      { id: 24, name: "Unstructured Linen Blazer", category: "Outerwear", price: 120, tag: "Smart", img: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=500&auto=format&fit=crop&q=75" },
+      { id: 25, name: "Water-Resistant Windbreaker", category: "Outerwear", price: 68, tag: "", img: "https://images.unsplash.com/photo-1604644401890-0bd678c83788?w=500&auto=format&fit=crop&q=75" },
+      { id: 26, name: "Sherpa Fleece Zip Jacket", category: "Outerwear", price: 74, tag: "", img: "https://images.unsplash.com/photo-1520975916090-3105956dac38?w=500&auto=format&fit=crop&q=75" },
+      { id: 27, name: "Classic Double-Breasted Trench", category: "Outerwear", price: 160, tag: "New", img: "https://images.unsplash.com/photo-1548883354-7622d03aca27?w=500&auto=format&fit=crop&q=75" },
+      { id: 28, name: "Quilted Utility Vest", category: "Outerwear", price: 58, tag: "", img: "https://images.unsplash.com/photo-1617137984095-74e4e5e3613f?w=500&auto=format&fit=crop&q=75" },
+
+      // FOOTWEAR (29-36)
+      { id: 29, name: "Retro Leather Low Sneakers", category: "Footwear", price: 89, tag: "Best Seller", img: "https://images.unsplash.com/photo-1549298916-b41d501d3772?w=500&auto=format&fit=crop&q=75" },
+      { id: 30, name: "Canvas Skate High-Tops", category: "Footwear", price: 60, tag: "", img: "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=500&auto=format&fit=crop&q=75" },
+      { id: 31, name: "Suede Chelsea Boots", category: "Footwear", price: 130, tag: "Premium", img: "https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=500&auto=format&fit=crop&q=75" },
+      { id: 32, name: "Everyday Knit Runners", category: "Footwear", price: 75, tag: "Lightweight", img: "https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?w=500&auto=format&fit=crop&q=75" },
+      { id: 33, name: "Leather Penny Loafers", category: "Footwear", price: 115, tag: "Classic", img: "https://images.unsplash.com/photo-1533867617858-e7b97e060509?w=500&auto=format&fit=crop&q=75" },
+      { id: 34, name: "Minimal Leather Slides", category: "Footwear", price: 42, tag: "Summer", img: "https://images.unsplash.com/photo-1603808033192-082d6919d3e1?w=500&auto=format&fit=crop&q=75" },
+      { id: 35, name: "Waterproof Hiking Boots", category: "Footwear", price: 140, tag: "", img: "https://images.unsplash.com/photo-1542838132-92c53300491e?w=500&auto=format&fit=crop&q=75" },
+      { id: 36, name: "Chunky Platform Sneakers", category: "Footwear", price: 92, tag: "Trending", img: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=500&auto=format&fit=crop&q=75" },
+
+      // ACCESSORIES (37-44)
+      { id: 37, name: "Washed Cotton Twill Cap", category: "Accessories", price: 24, tag: "", img: "https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=500&auto=format&fit=crop&q=75" },
+      { id: 38, name: "Full-Grain Leather Belt", category: "Accessories", price: 38, tag: "Essential", img: "https://images.unsplash.com/photo-1627123424574-724758594e93?w=500&auto=format&fit=crop&q=75" },
+      { id: 39, name: "Canvas Commuter Tote Bag", category: "Accessories", price: 35, tag: "Eco", img: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=500&auto=format&fit=crop&q=75" },
+      { id: 40, name: "Polarized Acetate Sunglasses", category: "Accessories", price: 58, tag: "UV400", img: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=500&auto=format&fit=crop&q=75" },
+      { id: 41, name: "Merino Wool Ribbed Beanie", category: "Accessories", price: 26, tag: "", img: "https://images.unsplash.com/photo-1576871337632-b9aef4c17ab9?w=500&auto=format&fit=crop&q=75" },
+      { id: 42, name: "Minimalist Crossbody Bag", category: "Accessories", price: 44, tag: "Popular", img: "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=500&auto=format&fit=crop&q=75" },
+      { id: 43, name: "Stainless Steel Dress Watch", category: "Accessories", price: 125, tag: "Trending", img: "https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=500&auto=format&fit=crop&q=75" },
+      { id: 44, name: "Everyday Leather Bi-Fold Wallet", category: "Accessories", price: 32, tag: "", img: "https://images.unsplash.com/photo-1627123424574-724758594e93?w=500&auto=format&fit=crop&q=75" }
+    ];
+
+    let currentCategory = "All";
+    let cart = [];
+
+    document.getElementById("totalCount").innerText = products.length;
+
+    function renderProducts(items) {
+      const grid = document.getElementById("productGrid");
+      grid.innerHTML = "";
+
+      if (items.length === 0) {
+        grid.innerHTML = `<p style="grid-column: 1/-1; text-align:center; color:var(--text-muted); padding: 3rem;">No products found matching your filter.</p>`;
+        return;
+      }
+
+      items.forEach(product => {
+        const card = document.createElement("article");
+        card.className = "product-card";
+        card.innerHTML = `
+          <div class="img-wrap">
+            <img class="product-image" src="${product.img}" alt="${product.name}" loading="lazy" />
+            ${product.tag ? `<span class="card-tag">${product.tag}</span>` : ""}
+          </div>
+          <div class="product-details">
+            <span class="product-cat">${product.category}</span>
+            <h3 class="product-name">${product.name}</h3>
+            <div class="product-price">$${product.price.toFixed(2)}</div>
+            <button class="add-btn" onclick="addToCart(${product.id})">+ Add to Bag</button>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function handleFilter() {
+      const search = document.getElementById("searchInput").value.toLowerCase();
+      const sort = document.getElementById("sortSelect").value;
+
+      let filtered = products.filter(item => {
+        const matchesCategory = currentCategory === "All" || item.category === currentCategory;
+        const matchesSearch = item.name.toLowerCase().includes(search) || item.category.toLowerCase().includes(search);
+        return matchesCategory && matchesSearch;
+      });
+
+      if (sort === "low-high") {
+        filtered.sort((a, b) => a.price - b.price);
+      } else if (sort === "high-low") {
+        filtered.sort((a, b) => b.price - a.price);
+      }
+
+      renderProducts(filtered);
+    }
+
+    function setCategory(cat, btn) {
+      currentCategory = cat;
+      document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      handleFilter();
+    }
+
+    function addToCart(productId) {
+      const item = products.find(p => p.id === productId);
+      if (item) {
+        cart.push(item);
+        updateCartUI();
+        showToast(`Added "${item.name}"`);
+      }
+    }
+
+    function removeFromCart(index) {
+      cart.splice(index, 1);
+      updateCartUI();
+    }
+
+    function updateCartUI() {
+      const badge = document.getElementById("cartBadge");
+      const drawerCount = document.getElementById("drawerCount");
+      const container = document.getElementById("cartItemsContainer");
+      const subtotalEl = document.getElementById("cartSubtotal");
+
+      badge.innerText = cart.length;
+      drawerCount.innerText = cart.length;
+
+      if (cart.length === 0) {
+        container.innerHTML = `<div class="empty-cart-msg">Your shopping bag is empty.</div>`;
+        subtotalEl.innerText = "$0.00";
+        return;
+      }
+
+      container.innerHTML = "";
+      let total = 0;
+
+      cart.forEach((item, index) => {
+        total += item.price;
+        const div = document.createElement("div");
+        div.className = "cart-item";
+        div.innerHTML = `
+          <img src="${item.img}" alt="${item.name}" />
+          <div class="cart-item-info">
+            <h4>${item.name}</h4>
+            <p>$${item.price.toFixed(2)}</p>
+          </div>
+          <button class="cart-item-remove" onclick="removeFromCart(${index})">Remove</button>
+        `;
+        container.appendChild(div);
+      });
+
+      subtotalEl.innerText = `$${total.toFixed(2)}`;
+    }
+
+    function toggleCart(open) {
+      document.getElementById("cartDrawer").classList.toggle("open", open);
+      document.getElementById("cartOverlay").classList.toggle("open", open);
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById("toast");
+      toast.innerText = msg;
+      toast.classList.add("show");
+      setTimeout(() => toast.classList.remove("show"), 2200);
+    }
+
+    function checkout() {
+      if (cart.length === 0) {
+        alert("Your bag is empty. Add some clothes first!");
+        return;
+      }
+      const total = cart.reduce((sum, i) => sum + i.price, 0);
+      alert(`Proceeding to checkout with ${cart.length} item(s).\nOrder Total: $${total.toFixed(2)}`);
+      cart = [];
+      updateCartUI();
+      toggleCart(false);
+    }
+
+    // Initial Render
+    renderProducts(products);
+  </script>
+
+</body>
+</html>
