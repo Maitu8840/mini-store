@@ -144,6 +144,34 @@ app.get("/api/test-order", (req, res) => {
     order: order
   });
 });
+// CANCEL ORDER
+app.get("/api/test-cancel/:id", (req, res) => {
+  const id = Number(req.params.id);
+
+  const order = orders.find(item => item.id === id);
+
+  if (!order) {
+    return res.status(404).json({
+      success: false,
+      message: "Order not found"
+    });
+  }
+
+  if (order.status === "Delivered") {
+    return res.status(400).json({
+      success: false,
+      message: "Delivered order cannot be cancelled"
+    });
+  }
+
+  order.status = "Cancelled";
+
+  res.json({
+    success: true,
+    message: "Order cancelled successfully",
+    order: order
+  });
+});
 app.post("/api/orders", (req, res) => {
   const { items, customer } = req.body;
 
