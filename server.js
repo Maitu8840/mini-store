@@ -115,7 +115,35 @@ app.get("/api/search", (req, res) => {
 /* =========================
    CREATE ORDER
 ========================= */
+// TEMPORARY TEST ORDER
+app.get("/api/test-order", (req, res) => {
+  const order = {
+    id: nextOrderId++,
+    items: [
+      {
+        productId: 1,
+        name: "Heavyweight Boxy Tee",
+        price: 28,
+        quantity: 1
+      }
+    ],
+    customer: {
+      name: "Test Customer",
+      phone: "9999999999"
+    },
+    status: "Pending",
+    paymentStatus: "Pending",
+    createdAt: new Date().toISOString()
+  };
 
+  orders.push(order);
+
+  res.json({
+    success: true,
+    message: "Test order created successfully",
+    order: order
+  });
+});
 app.post("/api/orders", (req, res) => {
   const { items, customer } = req.body;
 
