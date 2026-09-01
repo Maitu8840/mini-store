@@ -388,7 +388,38 @@ app.use((req, res) => {
 ========================= */
 
 const PORT = process.env.PORT || 3000;
+// ========================
+// PAYMENT
+// ========================
 
+app.post("/api/orders/:id/payment", (req, res) => {
+  const id = Number(req.params.id);
+
+  const order = orders.find(item => item.id === id);
+
+  if (!order) {
+    return res.status(404).json({
+      success: false,
+      message: "Order not found"
+    });
+  }
+
+  if (order.status === "Cancelled") {
+    return res.status(400).json({
+      success: false,
+      message: "Cancelled order cannot be paid"
+    });
+  }
+
+  order.paymentStatus = "Paid";
+  order.status = "Confirmed";
+
+  res.json({
+    success: true,
+    message: "Payment successful",
+    order: order
+  });
+});
 app.listen(PORT, () => {
   console.log(`Mini Mart Backend running on port ${PORT}`);
 });
