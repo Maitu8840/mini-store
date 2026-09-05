@@ -1,12 +1,20 @@
 /* =========================================
    MINI MART - FRONTEND JAVASCRIPT
+   COMPLETE VERSION
 ========================================= */
 
+/* =========================
+   API
+========================= */
 
-/* PRODUCTS */
+const API_URL = "https://mini-store-4sy3.onrender.com";
+
+
+/* =========================
+   PRODUCTS
+========================= */
 
 const products = [
-
   {
     id: 1,
     name: "Heavyweight Boxy Tee",
@@ -15,7 +23,6 @@ const products = [
     tag: "Best Seller",
     image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=700&q=80"
   },
-
   {
     id: 2,
     name: "Washed Vintage Graphic Tee",
@@ -24,7 +31,6 @@ const products = [
     tag: "New",
     image: "https://images.unsplash.com/photo-1503341504253-dff4815485f1?auto=format&fit=crop&w=700&q=80"
   },
-
   {
     id: 3,
     name: "Linen Camp Collar Shirt",
@@ -33,7 +39,6 @@ const products = [
     tag: "Popular",
     image: "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?auto=format&fit=crop&w=700&q=80"
   },
-
   {
     id: 4,
     name: "French Terry Hoodie",
@@ -42,7 +47,6 @@ const products = [
     tag: "Essential",
     image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=700&q=80"
   },
-
   {
     id: 5,
     name: "Organic Ribbed Tank",
@@ -51,7 +55,6 @@ const products = [
     tag: "",
     image: "https://images.unsplash.com/photo-1627225924765-552d49cf47ad?auto=format&fit=crop&w=700&q=80"
   },
-
   {
     id: 6,
     name: "Chunky Cable Knit Sweater",
@@ -60,7 +63,6 @@ const products = [
     tag: "Cozy",
     image: "https://images.unsplash.com/photo-1610652492500-ded49ceeb378?auto=format&fit=crop&w=700&q=80"
   },
-
   {
     id: 7,
     name: "Pique Cotton Polo",
@@ -69,7 +71,6 @@ const products = [
     tag: "",
     image: "https://images.unsplash.com/photo-1625910513413-5fc45a40a0a6?auto=format&fit=crop&w=700&q=80"
   },
-
   {
     id: 8,
     name: "Oversized Flannel",
@@ -78,7 +79,6 @@ const products = [
     tag: "Trending",
     image: "https://images.unsplash.com/photo-1596755389378-c31d21fd1273?auto=format&fit=crop&w=700&q=80"
   },
-
   {
     id: 9,
     name: "Brushed Cotton Oxford",
@@ -87,7 +87,6 @@ const products = [
     tag: "",
     image: "https://images.unsplash.com/photo-1603252110481-7ba873bf42ab?auto=format&fit=crop&w=700&q=80"
   },
-
   {
     id: 10,
     name: "Mockneck Long Sleeve",
@@ -97,7 +96,6 @@ const products = [
     image: "https://images.unsplash.com/photo-1598032895397-b9472444bf93?auto=format&fit=crop&w=700&q=80"
   },
 
-
   {
     id: 11,
     name: "Slim Fit Stretch Chinos",
@@ -106,7 +104,6 @@ const products = [
     tag: "Top Rated",
     image: "https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?auto=format&fit=crop&w=700&q=80"
   },
-
   {
     id: 12,
     name: "Relaxed Raw Selvedge Denim",
@@ -115,7 +112,6 @@ const products = [
     tag: "Premium",
     image: "https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=700&q=80"
   },
-
   {
     id: 13,
     name: "Everyday Pleated Trousers",
@@ -124,7 +120,6 @@ const products = [
     tag: "",
     image: "https://images.unsplash.com/photo-1506629905607-d9c297d0aee5?auto=format&fit=crop&w=700&q=80"
   },
-
   {
     id: 14,
     name: "Utility Cargo Pants",
@@ -133,7 +128,6 @@ const products = [
     tag: "Trending",
     image: "https://images.unsplash.com/photo-1517445312882-bc9910d016b7?auto=format&fit=crop&w=700&q=80"
   },
-
   {
     id: 15,
     name: "Classic Straight Jeans",
@@ -142,7 +136,6 @@ const products = [
     tag: "",
     image: "https://images.unsplash.com/photo-1475178626620-a4d074967452?auto=format&fit=crop&w=700&q=80"
   },
-
   {
     id: 16,
     name: "Relaxed Cotton Shorts",
@@ -152,7 +145,6 @@ const products = [
     image: "https://images.unsplash.com/photo-1591195853828-11db59a44f6b?auto=format&fit=crop&w=700&q=80"
   },
 
-
   {
     id: 17,
     name: "Minimal Bomber Jacket",
@@ -161,7 +153,6 @@ const products = [
     tag: "Premium",
     image: "https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=700&q=80"
   },
-
   {
     id: 18,
     name: "Lightweight Utility Jacket",
@@ -170,7 +161,6 @@ const products = [
     tag: "New",
     image: "https://images.unsplash.com/photo-1544022613-e87ca75a784a?auto=format&fit=crop&w=700&q=80"
   },
-
   {
     id: 19,
     name: "Classic Denim Jacket",
@@ -179,7 +169,6 @@ const products = [
     tag: "",
     image: "https://images.unsplash.com/photo-1576995853123-5a10305d93c0?auto=format&fit=crop&w=700&q=80"
   },
-
   {
     id: 20,
     name: "Water Resistant Windbreaker",
@@ -189,7 +178,6 @@ const products = [
     image: "https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?auto=format&fit=crop&w=700&q=80"
   },
 
-
   {
     id: 21,
     name: "Classic White Sneakers",
@@ -198,7 +186,6 @@ const products = [
     tag: "Best Seller",
     image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=700&q=80"
   },
-
   {
     id: 22,
     name: "Everyday Canvas Sneakers",
@@ -207,7 +194,6 @@ const products = [
     tag: "",
     image: "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?auto=format&fit=crop&w=700&q=80"
   },
-
   {
     id: 23,
     name: "Leather Minimal Loafers",
@@ -216,7 +202,6 @@ const products = [
     tag: "Premium",
     image: "https://images.unsplash.com/photo-1533867617858-e7b97e060509?auto=format&fit=crop&w=700&q=80"
   },
-
   {
     id: 24,
     name: "Retro Running Sneakers",
@@ -226,7 +211,6 @@ const products = [
     image: "https://images.unsplash.com/photo-1552346154-21d32810aba3?auto=format&fit=crop&w=700&q=80"
   },
 
-
   {
     id: 25,
     name: "Classic Baseball Cap",
@@ -235,7 +219,6 @@ const products = [
     tag: "",
     image: "https://images.unsplash.com/photo-1521369909029-2afed882baee?auto=format&fit=crop&w=700&q=80"
   },
-
   {
     id: 26,
     name: "Premium Leather Belt",
@@ -244,7 +227,6 @@ const products = [
     tag: "Essential",
     image: "https://images.unsplash.com/photo-1624222247344-550fb60583dc?auto=format&fit=crop&w=700&q=80"
   },
-
   {
     id: 27,
     name: "Everyday Canvas Backpack",
@@ -253,7 +235,6 @@ const products = [
     tag: "Popular",
     image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=700&q=80"
   },
-
   {
     id: 28,
     name: "Minimal Leather Wallet",
@@ -262,7 +243,6 @@ const products = [
     tag: "",
     image: "https://images.unsplash.com/photo-1627123424574-724758594e93?auto=format&fit=crop&w=700&q=80"
   },
-
   {
     id: 29,
     name: "Classic Sunglasses",
@@ -271,7 +251,6 @@ const products = [
     tag: "Summer",
     image: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=700&q=80"
   },
-
   {
     id: 30,
     name: "Ribbed Knit Beanie",
@@ -280,34 +259,35 @@ const products = [
     tag: "",
     image: "https://images.unsplash.com/photo-1575428652377-a2d80e2277fc?auto=format&fit=crop&w=700&q=80"
   }
-
 ];
 
 
-/* =========================================
+/* =========================
    STATE
-========================================= */
+========================= */
 
-let cart = JSON.parse(
-  localStorage.getItem("miniMartCart")
-) || [];
+let cart =
+  JSON.parse(localStorage.getItem("miniMartCart")) || [];
 
-let wishlist = JSON.parse(
-  localStorage.getItem("miniMartWishlist")
-) || [];
+let wishlist =
+  JSON.parse(localStorage.getItem("miniMartWishlist")) || [];
 
 let currentCategory = "All";
 let searchTerm = "";
 
 
-/* =========================================
+/* =========================
    START APP
-========================================= */
+========================= */
 
 document.addEventListener("DOMContentLoaded", () => {
 
-  document.getElementById("totalCount").textContent =
-    products.length;
+  const totalCount =
+    document.getElementById("totalCount");
+
+  if (totalCount) {
+    totalCount.textContent = products.length;
+  }
 
   renderProducts();
   updateCart();
@@ -316,14 +296,19 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-/* =========================================
+/* =========================
    PRODUCTS
-========================================= */
+========================= */
 
 function renderProducts() {
 
-  const grid = document.getElementById("productGrid");
-  const noProducts = document.getElementById("noProducts");
+  const grid =
+    document.getElementById("productGrid");
+
+  const noProducts =
+    document.getElementById("noProducts");
+
+  if (!grid) return;
 
   let filtered = products.filter(product => {
 
@@ -344,100 +329,111 @@ function renderProducts() {
   if (filtered.length === 0) {
 
     grid.innerHTML = "";
-    noProducts.classList.remove("hidden");
-    return;
 
+    if (noProducts) {
+      noProducts.classList.remove("hidden");
+    }
+
+    return;
   }
 
-  noProducts.classList.add("hidden");
+
+  if (noProducts) {
+    noProducts.classList.add("hidden");
+  }
 
 
-  grid.innerHTML = filtered.map(product => {
+  grid.innerHTML =
+    filtered.map(product => {
 
-    const liked = wishlist.includes(product.id);
+      const liked =
+        wishlist.includes(product.id);
 
-    return `
+      return `
 
-      <article class="product-card">
+        <article class="product-card">
 
-        <div class="product-image">
+          <div class="product-image">
 
-          <img
-            src="${product.image}"
-            alt="${product.name}"
-            loading="lazy"
-            onerror="this.src='https://placehold.co/700x700?text=Mini+Mart'"
-          >
+            <img
+              src="${product.image}"
+              alt="${product.name}"
+              loading="lazy"
+              onerror="this.src='https://placehold.co/700x700?text=Mini+Mart'"
+            >
 
-          ${
-            product.tag
-              ? `<span class="product-tag">${product.tag}</span>`
-              : ""
-          }
-
-          <button
-            class="wishlist-btn ${liked ? "active" : ""}"
-            onclick="toggleWishlist(${product.id})"
-            title="Wishlist"
-          >
-            ${liked ? "♥" : "♡"}
-          </button>
-
-        </div>
-
-        <div class="product-info">
-
-          <div class="product-category">
-            ${product.category}
-          </div>
-
-          <h3 class="product-name">
-            ${product.name}
-          </h3>
-
-          <div class="product-bottom">
-
-            <span class="price">
-              $${product.price.toFixed(2)}
-            </span>
+            ${
+              product.tag
+                ? `<span class="product-tag">${product.tag}</span>`
+                : ""
+            }
 
             <button
-              class="add-btn"
-              onclick="addToCart(${product.id})"
+              class="wishlist-btn ${liked ? "active" : ""}"
+              onclick="toggleWishlist(${product.id})"
+              title="Wishlist"
             >
-              Add to Bag
+              ${liked ? "♥" : "♡"}
             </button>
 
           </div>
 
-        </div>
+          <div class="product-info">
 
-      </article>
+            <div class="product-category">
+              ${product.category}
+            </div>
 
-    `;
+            <h3 class="product-name">
+              ${product.name}
+            </h3>
 
-  }).join("");
+            <div class="product-bottom">
+
+              <span class="price">
+                $${product.price.toFixed(2)}
+              </span>
+
+              <button
+                class="add-btn"
+                onclick="addToCart(${product.id})"
+              >
+                Add to Bag
+              </button>
+
+            </div>
+
+          </div>
+
+        </article>
+
+      `;
+
+    }).join("");
 
 }
 
 
-/* =========================================
+/* =========================
    SEARCH
-========================================= */
+========================= */
 
 function handleSearch() {
 
+  const input =
+    document.getElementById("searchInput");
+
   searchTerm =
-    document.getElementById("searchInput").value;
+    input ? input.value : "";
 
   renderProducts();
 
 }
 
 
-/* =========================================
+/* =========================
    CATEGORY
-========================================= */
+========================= */
 
 function setCategory(category, button) {
 
@@ -445,48 +441,47 @@ function setCategory(category, button) {
 
   document
     .querySelectorAll(".filter-btn")
-    .forEach(btn => btn.classList.remove("active"));
+    .forEach(btn =>
+      btn.classList.remove("active")
+    );
 
-  button.classList.add("active");
+  if (button) {
+    button.classList.add("active");
+  }
 
   renderProducts();
 
 }
 
 
-/* =========================================
+/* =========================
    SORT
-========================================= */
+========================= */
 
 function sortProducts() {
 
+  const select =
+    document.getElementById("sortSelect");
+
   const value =
-    document.getElementById("sortSelect").value;
+    select ? select.value : "featured";
 
   if (value === "featured") {
-
     products.sort((a, b) => a.id - b.id);
-
   }
 
   if (value === "low") {
-
     products.sort((a, b) => a.price - b.price);
-
   }
 
   if (value === "high") {
-
     products.sort((a, b) => b.price - a.price);
-
   }
 
   if (value === "name") {
-
     products.sort((a, b) =>
       a.name.localeCompare(b.name)
     );
-
   }
 
   renderProducts();
@@ -494,41 +489,35 @@ function sortProducts() {
 }
 
 
-/* =========================================
+/* =========================
    CART
-========================================= */
+========================= */
 
 function addToCart(id) {
 
-  const product = products.find(
-    item => item.id === id
-  );
+  const product =
+    products.find(item => item.id === id);
 
   if (!product) return;
 
-
-  const existing = cart.find(
-    item => item.id === id
-  );
-
+  const existing =
+    cart.find(item => item.id === id);
 
   if (existing) {
-
     existing.quantity += 1;
-
   } else {
-
     cart.push({
       id: product.id,
       quantity: 1
     });
-
   }
-
 
   saveCart();
   updateCart();
-  showToast(`${product.name} added to bag ✓`);
+
+  showToast(
+    `${product.name} added to bag ✓`
+  );
 
 }
 
@@ -544,15 +533,18 @@ function updateCart() {
   const subtotalElement =
     document.getElementById("cartSubtotal");
 
+  if (!container) return;
 
-  const totalQuantity = cart.reduce(
-    (total, item) => total + item.quantity,
-    0
-  );
+  const totalQuantity =
+    cart.reduce(
+      (total, item) =>
+        total + item.quantity,
+      0
+    );
 
-
-  badge.textContent = totalQuantity;
-
+  if (badge) {
+    badge.textContent = totalQuantity;
+  }
 
   if (cart.length === 0) {
 
@@ -577,88 +569,92 @@ function updateCart() {
 
     `;
 
-    subtotalElement.textContent = "$0.00";
+    if (subtotalElement) {
+      subtotalElement.textContent = "$0.00";
+    }
 
     return;
-
   }
 
 
   let subtotal = 0;
 
 
-  container.innerHTML = cart.map(item => {
+  container.innerHTML =
+    cart.map(item => {
 
-    const product =
-      products.find(p => p.id === item.id);
+      const product =
+        products.find(p => p.id === item.id);
 
-    if (!product) return "";
+      if (!product) return "";
 
+      const itemTotal =
+        product.price * item.quantity;
 
-    const itemTotal =
-      product.price * item.quantity;
+      subtotal += itemTotal;
 
-    subtotal += itemTotal;
+      return `
 
+        <div class="cart-item">
 
-    return `
-
-      <div class="cart-item">
-
-        <img
-          src="${product.image}"
-          alt="${product.name}"
-          onerror="this.src='https://placehold.co/200x200?text=Mini+Mart'"
-        >
-
-        <div>
-
-          <div class="product-category">
-            ${product.category}
-          </div>
-
-          <h4>${product.name}</h4>
-
-          <div class="cart-price">
-            $${product.price.toFixed(2)}
-          </div>
-
-          <button
-            class="remove-btn"
-            onclick="removeFromCart(${product.id})"
+          <img
+            src="${product.image}"
+            alt="${product.name}"
+            onerror="this.src='https://placehold.co/200x200?text=Mini+Mart'"
           >
-            Remove
-          </button>
+
+          <div>
+
+            <div class="product-category">
+              ${product.category}
+            </div>
+
+            <h4>${product.name}</h4>
+
+            <div class="cart-price">
+              $${product.price.toFixed(2)}
+            </div>
+
+            <button
+              class="remove-btn"
+              onclick="removeFromCart(${product.id})"
+            >
+              Remove
+            </button>
+
+          </div>
+
+          <div class="quantity">
+
+            <button
+              onclick="changeQuantity(${product.id}, -1)"
+            >
+              −
+            </button>
+
+            <strong>
+              ${item.quantity}
+            </strong>
+
+            <button
+              onclick="changeQuantity(${product.id}, 1)"
+            >
+              +
+            </button>
+
+          </div>
 
         </div>
 
-        <div class="quantity">
+      `;
 
-          <button
-            onclick="changeQuantity(${product.id}, -1)"
-          >
-            −
-          </button>
-
-          <strong>${item.quantity}</strong>
-
-          <button
-            onclick="changeQuantity(${product.id}, 1)"
-          >
-            +
-          </button>
-
-        </div>
-
-      </div>
-
-    `;
-
-  }).join("");
+    }).join("");
 
 
-  subtotalElement.textContent =
-    `$${subtotal.toFixed(2)}`;
+  if (subtotalElement) {
+    subtotalElement.textContent =
+      `$${subtotal.toFixed(2)}`;
+  }
 
 }
 
@@ -670,18 +666,16 @@ function changeQuantity(id, amount) {
 
   if (!item) return;
 
-
   item.quantity += amount;
-
 
   if (item.quantity <= 0) {
 
-    cart = cart.filter(
-      item => item.id !== id
-    );
+    cart =
+      cart.filter(
+        item => item.id !== id
+      );
 
   }
-
 
   saveCart();
   updateCart();
@@ -691,14 +685,17 @@ function changeQuantity(id, amount) {
 
 function removeFromCart(id) {
 
-  cart = cart.filter(
-    item => item.id !== id
-  );
+  cart =
+    cart.filter(
+      item => item.id !== id
+    );
 
   saveCart();
   updateCart();
 
-  showToast("Item removed from bag");
+  showToast(
+    "Item removed from bag"
+  );
 
 }
 
@@ -713,9 +710,9 @@ function saveCart() {
 }
 
 
-/* =========================================
+/* =========================
    CART DRAWER
-========================================= */
+========================= */
 
 function toggleCart(open) {
 
@@ -725,53 +722,60 @@ function toggleCart(open) {
   const overlay =
     document.getElementById("cartOverlay");
 
+  if (!drawer || !overlay) return;
 
   if (open) {
 
     drawer.classList.add("open");
     overlay.classList.add("open");
 
-    document.body.style.overflow = "hidden";
+    document.body.style.overflow =
+      "hidden";
 
   } else {
 
     drawer.classList.remove("open");
     overlay.classList.remove("open");
 
-    document.body.style.overflow = "";
+    document.body.style.overflow =
+      "";
 
   }
 
 }
 
 
-/* =========================================
+/* =========================
    WISHLIST
-========================================= */
+========================= */
 
 function toggleWishlist(id) {
 
   if (wishlist.includes(id)) {
 
     wishlist =
-      wishlist.filter(item => item !== id);
+      wishlist.filter(
+        item => item !== id
+      );
 
-    showToast("Removed from wishlist");
+    showToast(
+      "Removed from wishlist"
+    );
 
   } else {
 
     wishlist.push(id);
 
-    showToast("Added to wishlist ♥");
+    showToast(
+      "Added to wishlist ♥"
+    );
 
   }
-
 
   localStorage.setItem(
     "miniMartWishlist",
     JSON.stringify(wishlist)
   );
-
 
   updateWishlistBadge();
   renderProducts();
@@ -781,9 +785,15 @@ function toggleWishlist(id) {
 
 function updateWishlistBadge() {
 
-  document.getElementById(
-    "wishlistBadge"
-  ).textContent = wishlist.length;
+  const badge =
+    document.getElementById(
+      "wishlistBadge"
+    );
+
+  if (badge) {
+    badge.textContent =
+      wishlist.length;
+  }
 
 }
 
@@ -791,11 +801,16 @@ function updateWishlistBadge() {
 function openWishlist() {
 
   const modal =
-    document.getElementById("wishlistModal");
+    document.getElementById(
+      "wishlistModal"
+    );
 
   const content =
-    document.getElementById("wishlistContent");
+    document.getElementById(
+      "wishlistContent"
+    );
 
+  if (!modal || !content) return;
 
   const favoriteProducts =
     products.filter(product =>
@@ -813,7 +828,9 @@ function openWishlist() {
 
         <h3>Your wishlist is empty</h3>
 
-        <p>Tap the heart on products you like.</p>
+        <p>
+          Tap the heart on products you like.
+        </p>
 
       </div>
 
@@ -857,7 +874,6 @@ function openWishlist() {
 
   }
 
-
   modal.classList.add("open");
 
 }
@@ -865,30 +881,34 @@ function openWishlist() {
 
 function closeWishlist() {
 
-  document
-    .getElementById("wishlistModal")
-    .classList.remove("open");
+  const modal =
+    document.getElementById(
+      "wishlistModal"
+    );
+
+  if (modal) {
+    modal.classList.remove("open");
+  }
 
 }
 
 
-/* =========================================
+/* =========================
    CHECKOUT
-========================================= */
+========================= */
 
 function openCheckout() {
 
   if (cart.length === 0) {
 
-    showToast("Your cart is empty");
+    showToast(
+      "Your cart is empty"
+    );
 
     return;
-
   }
 
-
   toggleCart(false);
-
 
   const itemCount =
     cart.reduce(
@@ -897,12 +917,13 @@ function openCheckout() {
       0
     );
 
-
   const total =
     cart.reduce((sum, item) => {
 
       const product =
-        products.find(p => p.id === item.id);
+        products.find(
+          p => p.id === item.id
+        );
 
       return sum +
         (product.price * item.quantity);
@@ -910,59 +931,96 @@ function openCheckout() {
     }, 0);
 
 
-  document.getElementById(
-    "checkoutItems"
-  ).textContent = itemCount;
+  const itemsElement =
+    document.getElementById(
+      "checkoutItems"
+    );
 
+  const totalElement =
+    document.getElementById(
+      "checkoutTotal"
+    );
 
-  document.getElementById(
-    "checkoutTotal"
-  ).textContent =
-    `$${total.toFixed(2)}`;
+  const modal =
+    document.getElementById(
+      "checkoutModal"
+    );
 
+  if (itemsElement) {
+    itemsElement.textContent =
+      itemCount;
+  }
 
-  document
-    .getElementById("checkoutModal")
-    .classList.add("open");
+  if (totalElement) {
+    totalElement.textContent =
+      `$${total.toFixed(2)}`;
+  }
+
+  if (modal) {
+    modal.classList.add("open");
+  }
 
 }
 
 
 function closeCheckout() {
 
-  document
-    .getElementById("checkoutModal")
-    .classList.remove("open");
+  const modal =
+    document.getElementById(
+      "checkoutModal"
+    );
+
+  if (modal) {
+    modal.classList.remove("open");
+  }
 
 }
 
 
-/* =========================================
+/* =========================
    PLACE ORDER
-========================================= */
+   BACKEND CONNECTED
+========================= */
 
-function placeOrder(event) {
+async function placeOrder(event) {
 
   event.preventDefault();
 
-
   const firstName =
-    document.getElementById("firstName").value.trim();
+    document
+      .getElementById("firstName")
+      .value
+      .trim();
 
   const lastName =
-    document.getElementById("lastName").value.trim();
+    document
+      .getElementById("lastName")
+      .value
+      .trim();
 
   const email =
-    document.getElementById("email").value.trim();
+    document
+      .getElementById("email")
+      .value
+      .trim();
 
   const address =
-    document.getElementById("address").value.trim();
+    document
+      .getElementById("address")
+      .value
+      .trim();
 
   const city =
-    document.getElementById("city").value.trim();
+    document
+      .getElementById("city")
+      .value
+      .trim();
 
   const pincode =
-    document.getElementById("pincode").value.trim();
+    document
+      .getElementById("pincode")
+      .value
+      .trim();
 
 
   if (
@@ -974,165 +1032,90 @@ function placeOrder(event) {
     !pincode
   ) {
 
-    showToast("Please complete all fields");
+    showToast(
+      "Please complete all fields"
+    );
 
     return;
-
   }
 
 
-  const orderId =
-    "MM-" +
-    Date.now().toString().slice(-8);
+  if (cart.length === 0) {
+
+    showToast(
+      "Your cart is empty"
+    );
+
+    return;
+  }
 
 
-  const order = {
+  const orderItems =
+    cart.map(item => {
 
-    orderId,
+      const product =
+        products.find(
+          p => p.id === item.id
+        );
 
-    customer: {
-      firstName,
-      lastName,
+      return {
+        productId: product.id,
+        name: product.name,
+        price: product.price,
+        quantity: item.quantity
+      };
+
+    });
+
+
+  const customer = {
+
+    name:
+      `${firstName} ${lastName}`,
+
+    email:
       email,
+
+    address:
       address,
+
+    city:
       city,
+
+    pincode:
       pincode
-    },
-
-    items: [...cart],
-
-    date: new Date().toISOString()
 
   };
 
 
-  /* Save demo order locally */
+  try {
 
-  const orders =
-    JSON.parse(
-      localStorage.getItem("miniMartOrders")
-    ) || [];
-
-
-  orders.push(order);
+    showToast(
+      "Placing your order..."
+    );
 
 
-  localStorage.setItem(
-    "miniMartOrders",
-    JSON.stringify(orders)
-  );
+    const response =
+      await fetch(
+        `${API_URL}/api/orders`,
+        {
+          method: "POST",
+
+          headers: {
+            "Content-Type":
+              "application/json"
+          },
+
+          body:
+            JSON.stringify({
+              items:
+                orderItems,
+
+              customer:
+                customer
+            })
+        }
+      );
 
 
-  /* Clear cart */
-
-  cart = [];
-
-  saveCart();
-  updateCart();
-
-
-  closeCheckout();
-
-
-  document.getElementById(
-    "orderNumber"
-  ).textContent =
-    `Order Number: ${orderId}`;
-
-
-  document
-    .getElementById("successModal")
-    .classList.add("open");
-
-
-  document.getElementById(
-    "checkoutForm"
-  ).reset();
-
-}
-
-
-/* =========================================
-   SUCCESS
-========================================= */
-
-function closeSuccess() {
-
-  document
-    .getElementById("successModal")
-    .classList.remove("open");
-
-}
-
-
-/* =========================================
-   TOAST
-========================================= */
-
-function showToast(message) {
-
-  const toast =
-    document.getElementById("toast");
-
-  toast.textContent = message;
-
-  toast.classList.add("show");
-
-
-  clearTimeout(window.toastTimer);
-
-
-  window.toastTimer =
-    setTimeout(() => {
-
-      toast.classList.remove("show");
-
-    }, 2200);
-
-}
-
-
-/* =========================================
-   NAVIGATION
-========================================= */
-
-function scrollToProducts() {
-
-  document
-    .getElementById("products")
-    .scrollIntoView({
-      behavior: "smooth"
-    });
-
-}
-
-
-function goHome() {
-
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
-  });
-
-}
-
-
-/* =========================================
-   ESC KEY
-========================================= */
-
-document.addEventListener(
-  "keydown",
-  event => {
-
-    if (event.key === "Escape") {
-
-      toggleCart(false);
-      closeWishlist();
-      closeCheckout();
-      closeSuccess();
-
-    }
-
-  }
-);
+    cons
