@@ -248,6 +248,7 @@ function addToCart(id) {
   updateCart();
 
   showToast(product.name + " added to bag ✓");
+   toggleCart(true);
 }
 
 function updateCart() {
