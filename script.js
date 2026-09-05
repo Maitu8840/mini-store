@@ -1061,3 +1061,231 @@ function closeProductDetails() {
     modal.classList.remove("open");
   }
 }
+/* =========================================
+   MY ORDERS
+========================================= */
+
+function openOrders() {
+
+  let modal = document.getElementById("ordersModal");
+
+  if (!modal) {
+
+    modal = document.createElement("div");
+
+    modal.id = "ordersModal";
+    modal.className = "modal";
+
+    document.body.appendChild(modal);
+  }
+
+  const orders =
+    JSON.parse(
+      localStorage.getItem("miniMartOrders")
+    ) || [];
+
+  modal.innerHTML = `
+    <div class="modal-card" style="max-width:800px;width:95%;">
+
+      <button
+        class="modal-close"
+        onclick="closeOrders()">
+        ×
+      </button>
+
+      <span class="small-title">
+        YOUR ORDERS
+      </span>
+
+      <h2>Order History</h2>
+
+      <div id="ordersList" style="margin-top:20px;">
+
+        ${
+          orders.length === 0
+            ? `
+              <div class="empty-cart">
+                <div class="empty-icon">📦</div>
+                <h3>No orders yet</h3>
+                <p>Your placed orders will appear here.</p>
+              </div>
+            `
+            : orders
+                .slice()
+                .reverse()
+                .map(order => {
+
+                  const status =
+                    order.status || "Pending";
+
+                  return `
+                    <div style="
+                      border:1px solid #e2e8f0;
+                      border-radius:16px;
+                      padding:18px;
+                      margin-bottom:15px;
+                    ">
+
+                      <div style="
+                        display:flex;
+                        justify-content:space-between;
+                        gap:10px;
+                        flex-wrap:wrap;
+                      ">
+
+                        <strong>
+                          Order #${
+                            order.id ||
+                            order.orderId
+                          }
+                        </strong>
+
+                        <strong>
+                          ${status}
+                        </strong>
+
+                      </div>
+
+                      <div style="
+                        margin-top:12px;
+                        color:#64748b;
+                      ">
+
+                        ${
+                          (order.items || [])
+                            .map(item => `
+                              <div>
+                                ${item.name}
+                                × ${item.quantity}
+                              </div>
+                            `)
+                            .join("")
+                        }
+
+                      </div>
+
+                      ${
+                        status !== "Cancelled" &&
+                        status !== "Delivered"
+                          ? `
+                            <button
+                              onclick="cancelMyOrder('${
+                                order.id ||
+                                order.orderId
+                              }')"
+                              style="
+                                margin-top:15px;
+                                padding:10px 16px;
+                                border:1px solid #ef4444;
+                                background:white;
+                                color:#ef4444;
+                                border-radius:8px;
+                                font-weight:700;
+                                cursor:pointer;
+                              ">
+                              Cancel Order
+                            </button>
+                          `
+                          : ""
+                      }
+
+                    </div>
+                  `;
+
+                })
+                .join("")
+        }
+
+      </div>
+
+    </div>
+  `;
+
+  modal.classList.add("open");
+}
+
+
+/* =========================
+   CLOSE ORDERS
+========================= */
+
+function closeOrders() {
+
+  const modal =
+    document.getElementById("ordersModal");
+
+  if (modal) {
+    modal.classList.remove("open");
+  }
+}
+
+
+/* =========================
+   CANCEL ORDER
+========================= */
+
+async function cancelMyOrder(orderId) {
+
+  if (!confirm("Cancel this order?")) {
+    return;
+  }
+
+  try {
+
+    const response = await fetch(
+      API_URL +
+      "/api/orders/" +
+      orderId +
+      "/cancel",
+      {
+        method: "PUT"
+      }
+    );
+
+    const data = await response.json();
+
+    if (!response.ok || !data.success) {
+      throw new Error(
+        data.message || "Cancel failed"
+      );
+    }
+
+    let orders =
+      JSON.parse(
+        localStorage.getItem("miniMartOrders")
+      ) || [];
+
+    orders = orders.map(order => {
+
+      const localId =
+        String(order.id || order.orderId);
+
+      if (localId === String(orderId)) {
+
+        return {
+          ...order,
+          status: "Cancelled"
+        };
+      }
+
+      return order;
+    });
+
+    localStorage.setItem(
+      "miniMartOrders",
+      JSON.stringify(orders)
+    );
+
+    showToast("Order cancelled successfully ✓");
+
+    openOrders();
+
+  } catch (error) {
+
+    console.error(error);
+
+    showToast(
+      "Unable to cancel order"
+    );
+  }
+}
