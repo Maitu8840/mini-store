@@ -98,7 +98,8 @@ function renderProducts() {
     const liked = wishlist.includes(product.id);
 
     return `
-      <article class="product-card">
+      <article class="product-card" onclick="openProductDetails(${product.id})">
+      
 
         <div class="product-image">
 
