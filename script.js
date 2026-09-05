@@ -118,7 +118,7 @@ function renderProducts() {
 
           <button
             class="wishlist-btn ${liked ? "active" : ""}"
-            onclick="toggleWishlist(${product.id})"
+            onclick="event.stopPropagation(); toggleWishlist(${product.id})"
           >
             ${liked ? "♥" : "♡"}
           </button>
@@ -143,7 +143,7 @@ function renderProducts() {
 
             <button
               class="add-btn"
-              onclick="addToCart(${product.id})"
+              onclick="event.stopPropagation(); addToCart(${product.id})"
             >
               Add to Bag
             </button>
