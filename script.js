@@ -720,3 +720,344 @@ document.addEventListener("keydown", function (event) {
     closeSuccess();
   }
 });
+/* =========================================
+   PRODUCT DETAIL PAGE
+========================================= */
+
+function openProductDetails(id) {
+  const product = products.find(p => p.id === id);
+  if (!product) return;
+
+  let modal = document.getElementById("productDetailsModal");
+
+  if (!modal) {
+    modal = document.createElement("div");
+    modal.id = "productDetailsModal";
+    modal.className = "modal";
+    document.body.appendChild(modal);
+  }
+
+  modal.innerHTML = `
+    <div class="modal-card" style="
+      max-width:900px;
+      width:95%;
+      padding:0;
+      overflow:hidden;
+    ">
+
+      <button
+        onclick="closeProductDetails()"
+        style="
+          position:absolute;
+          right:18px;
+          top:15px;
+          z-index:10;
+          width:40px;
+          height:40px;
+          border:0;
+          border-radius:50%;
+          background:white;
+          font-size:28px;
+          cursor:pointer;
+          box-shadow:0 3px 12px rgba(0,0,0,.15);
+        ">
+        ×
+      </button>
+
+      <div style="
+        display:grid;
+        grid-template-columns:1fr 1fr;
+        gap:0;
+      ">
+
+        <!-- BIG PRODUCT IMAGE -->
+        <div style="
+          background:#f1f5f9;
+          min-height:500px;
+        ">
+          <img
+            src="${product.image}"
+            alt="${product.name}"
+            style="
+              width:100%;
+              height:100%;
+              min-height:500px;
+              object-fit:cover;
+              display:block;
+            "
+            onerror="
+              this.src='https://placehold.co/700x700?text=Mini+Mart'
+            "
+          >
+        </div>
+
+        <!-- PRODUCT INFORMATION -->
+        <div style="
+          padding:35px;
+          display:flex;
+          flex-direction:column;
+          justify-content:center;
+        ">
+
+          <span style="
+            font-size:12px;
+            letter-spacing:2px;
+            font-weight:700;
+            color:#64748b;
+            text-transform:uppercase;
+          ">
+            ${product.category}
+          </span>
+
+          <h2 style="
+            font-size:32px;
+            line-height:1.15;
+            margin:10px 0;
+          ">
+            ${product.name}
+          </h2>
+
+          <div style="
+            font-size:25px;
+            font-weight:800;
+            margin:5px 0 18px;
+          ">
+            $${product.price.toFixed(2)}
+          </div>
+
+          <p style="
+            color:#64748b;
+            line-height:1.7;
+            margin-bottom:20px;
+          ">
+            Premium everyday essential made for comfort,
+            quality and timeless everyday style.
+          </p>
+
+          ${
+            product.tag
+              ? `
+                <div style="
+                  display:inline-block;
+                  margin-bottom:20px;
+                  font-weight:700;
+                ">
+                  ${product.tag}
+                </div>
+              `
+              : ""
+          }
+
+          <!-- SIZE -->
+          <div style="margin-bottom:22px;">
+
+            <strong style="
+              display:block;
+              margin-bottom:10px;
+            ">
+              Select Size
+            </strong>
+
+            <div style="
+              display:flex;
+              gap:10px;
+              flex-wrap:wrap;
+            ">
+
+              <button
+                class="size-btn"
+                onclick="selectProductSize(this,'S')">
+                S
+              </button>
+
+              <button
+                class="size-btn"
+                onclick="selectProductSize(this,'M')">
+                M
+              </button>
+
+              <button
+                class="size-btn"
+                onclick="selectProductSize(this,'L')">
+                L
+              </button>
+
+              <button
+                class="size-btn"
+                onclick="selectProductSize(this,'XL')">
+                XL
+              </button>
+
+            </div>
+
+          </div>
+
+          <!-- QUANTITY -->
+          <div style="
+            display:flex;
+            align-items:center;
+            gap:14px;
+            margin-bottom:22px;
+          ">
+
+            <strong>Quantity</strong>
+
+            <button
+              onclick="changeDetailQuantity(-1)"
+              style="
+                width:36px;
+                height:36px;
+                border:1px solid #cbd5e1;
+                background:white;
+                border-radius:8px;
+                font-size:20px;
+                cursor:pointer;
+              ">
+              −
+            </button>
+
+            <strong id="detailQuantity">1</strong>
+
+            <button
+              onclick="changeDetailQuantity(1)"
+              style="
+                width:36px;
+                height:36px;
+                border:1px solid #cbd5e1;
+                background:white;
+                border-radius:8px;
+                font-size:20px;
+                cursor:pointer;
+              ">
+              +
+            </button>
+
+          </div>
+
+          <!-- ADD TO BAG -->
+          <button
+            onclick="addDetailProductToCart(${product.id})"
+            style="
+              width:100%;
+              padding:16px;
+              border:0;
+              border-radius:10px;
+              background:#0f172a;
+              color:white;
+              font-size:16px;
+              font-weight:700;
+              cursor:pointer;
+            ">
+            Add to Bag →
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+  `;
+
+  modal.classList.add("open");
+
+  window.detailQuantity = 1;
+  window.detailSize = null;
+}
+
+
+/* =========================
+   SIZE
+========================= */
+
+function selectProductSize(button, size) {
+
+  document
+    .querySelectorAll(".size-btn")
+    .forEach(btn => {
+      btn.style.background = "white";
+      btn.style.color = "#0f172a";
+      btn.style.border = "1px solid #cbd5e1";
+    });
+
+  button.style.background = "#0f172a";
+  button.style.color = "white";
+  button.style.border = "1px solid #0f172a";
+
+  window.detailSize = size;
+}
+
+
+/* =========================
+   QUANTITY
+========================= */
+
+function changeDetailQuantity(amount) {
+
+  window.detailQuantity =
+    (window.detailQuantity || 1) + amount;
+
+  if (window.detailQuantity < 1) {
+    window.detailQuantity = 1;
+  }
+
+  document.getElementById("detailQuantity").textContent =
+    window.detailQuantity;
+}
+
+
+/* =========================
+   ADD DETAIL PRODUCT
+========================= */
+
+function addDetailProductToCart(id) {
+
+  if (!window.detailSize) {
+    showToast("Please select a size");
+    return;
+  }
+
+  const product = products.find(p => p.id === id);
+
+  if (!product) return;
+
+  const existing = cart.find(item => item.id === id);
+
+  if (existing) {
+    existing.quantity += window.detailQuantity;
+  } else {
+    cart.push({
+      id: id,
+      quantity: window.detailQuantity,
+      size: window.detailSize
+    });
+  }
+
+  saveCart();
+  updateCart();
+
+  closeProductDetails();
+
+  toggleCart(true);
+
+  showToast(
+    product.name +
+    " - Size " +
+    window.detailSize +
+    " added ✓"
+  );
+}
+
+
+/* =========================
+   CLOSE DETAILS
+========================= */
+
+function closeProductDetails() {
+
+  const modal =
+    document.getElementById("productDetailsModal");
+
+  if (modal) {
+    modal.classList.remove("open");
+  }
+}
