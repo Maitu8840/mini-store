@@ -360,9 +360,118 @@
     </div>
 
   </div>
+  <!-- LOGIN / SIGN UP MODAL -->
+<div id="loginModal" class="modal">
+
+  <div class="modal-card login-card">
+
+    <button class="modal-close" onclick="closeLogin()">×</button>
+
+    <div class="login-logo">
+      MINI <span>MART</span>
+    </div>
+
+    <span class="small-title">WELCOME TO MINI MART</span>
+    <h2 id="loginTitle">Login to Your Account</h2>
+
+    <!-- LOGIN FORM -->
+    <form id="loginForm" onsubmit="handleLogin(event)">
+
+      <div class="form-group">
+        <label>Email</label>
+        <input
+          id="loginEmail"
+          type="email"
+          required
+          placeholder="Enter your email">
+      </div>
+
+      <div class="form-group">
+        <label>Password</label>
+        <input
+          id="loginPassword"
+          type="password"
+          required
+          placeholder="Enter your password">
+      </div>
+
+      <button class="checkout-btn" type="submit">
+        Login →
+      </button>
+
+    </form>
+
+    <p class="login-switch">
+      Don't have an account?
+      <button type="button" onclick="showSignup()">Sign Up</button>
+    </p>
+
+    <!-- SIGN UP FORM -->
+    <form id="signupForm"
+          onsubmit="handleSignup(event)"
+          style="display:none;">
+
+      <div class="form-group">
+        <label>Full Name</label>
+        <input
+          id="signupName"
+          type="text"
+          required
+          placeholder="Enter your full name">
+      </div>
+
+      <div class="form-group">
+        <label>Email</label>
+        <input
+          id="signupEmail"
+          type="email"
+          required
+          placeholder="Enter your email">
+      </div>
+
+      <div class="form-group">
+        <label>Mobile Number</label>
+        <input
+          id="signupPhone"
+          type="tel"
+          required
+          placeholder="Enter mobile number">
+      </div>
+
+      <div class="form-group">
+        <label>Password</label>
+        <input
+          id="signupPassword"
+          type="password"
+          required
+          placeholder="Create a password">
+      </div>
+
+      <div class="form-group">
+        <label>Confirm Password</label>
+        <input
+          id="signupConfirm"
+          type="password"
+          required
+          placeholder="Confirm password">
+      </div>
+
+      <button class="checkout-btn" type="submit">
+        Create Account →
+      </button>
+
+    </form>
+
+    <p id="signupSwitch" class="login-switch" style="display:none;">
+      Already have an account?
+      <button type="button" onclick="showLogin()">Login</button>
+    </p>
+
+  </div>
+</div>
 
 
-  <!-- TOAST -->
+<!-- TOAST -->
   <div id="toast" class="toast">
     Added to bag ✓
   </div>
