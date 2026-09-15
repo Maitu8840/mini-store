@@ -1289,3 +1289,232 @@ async function cancelMyOrder(orderId) {
     );
   }
 }
+/* =========================================
+   LOGIN & SIGN UP
+========================================= */
+
+function openLogin() {
+  const modal = document.getElementById("loginModal");
+
+  if (modal) {
+    modal.classList.add("open");
+    showLogin();
+  }
+}
+
+
+/* =========================
+   CLOSE LOGIN
+========================= */
+
+function closeLogin() {
+  const modal = document.getElementById("loginModal");
+
+  if (modal) {
+    modal.classList.remove("open");
+  }
+}
+
+
+/* =========================
+   SHOW LOGIN
+========================= */
+
+function showLogin() {
+  document.getElementById("loginForm").style.display = "block";
+  document.querySelector(".login-switch").style.display = "block";
+
+  document.getElementById("signupForm").style.display = "none";
+  document.getElementById("signupSwitch").style.display = "none";
+
+  document.getElementById("loginTitle").textContent =
+    "Login to Your Account";
+}
+
+
+/* =========================
+   SHOW SIGN UP
+========================= */
+
+function showSignup() {
+  document.getElementById("loginForm").style.display = "none";
+  document.querySelector(".login-switch").style.display = "none";
+
+  document.getElementById("signupForm").style.display = "block";
+  document.getElementById("signupSwitch").style.display = "block";
+
+  document.getElementById("loginTitle").textContent =
+    "Create Your Account";
+}
+
+
+/* =========================
+   SIGN UP
+========================= */
+
+function handleSignup(event) {
+  event.preventDefault();
+
+  const name =
+    document.getElementById("signupName").value.trim();
+
+  const email =
+    document.getElementById("signupEmail").value.trim().toLowerCase();
+
+  const phone =
+    document.getElementById("signupPhone").value.trim();
+
+  const password =
+    document.getElementById("signupPassword").value;
+
+  const confirmPassword =
+    document.getElementById("signupConfirm").value;
+
+
+  if (password !== confirmPassword) {
+    showToast("Passwords do not match");
+    return;
+  }
+
+
+  const users =
+    JSON.parse(localStorage.getItem("miniMartUsers")) || [];
+
+
+  const existingUser = users.find(function(user) {
+    return user.email === email;
+  });
+
+
+  if (existingUser) {
+    showToast("Account already exists");
+    return;
+  }
+
+
+  const newUser = {
+    name: name,
+    email: email,
+    phone: phone,
+    password: password
+  };
+
+
+  users.push(newUser);
+
+
+  localStorage.setItem(
+    "miniMartUsers",
+    JSON.stringify(users)
+  );
+
+
+  showToast("Account created successfully ✓");
+
+
+  document.getElementById("signupForm").reset();
+
+
+  setTimeout(function() {
+    showLogin();
+
+    document.getElementById("loginEmail").value =
+      email;
+
+    document.getElementById("loginPassword").value =
+      "";
+
+  }, 700);
+}
+
+
+/* =========================
+   LOGIN
+========================= */
+
+function handleLogin(event) {
+  event.preventDefault();
+
+
+  const email =
+    document.getElementById("loginEmail").value.trim().toLowerCase();
+
+  const password =
+    document.getElementById("loginPassword").value;
+
+
+  const users =
+    JSON.parse(localStorage.getItem("miniMartUsers")) || [];
+
+
+  const user = users.find(function(account) {
+    return (
+      account.email === email &&
+      account.password === password
+    );
+  });
+
+
+  if (!user) {
+    showToast("Invalid email or password");
+    return;
+  }
+
+
+  localStorage.setItem(
+    "miniMartLoggedInUser",
+    JSON.stringify(user)
+  );
+
+
+  showToast(
+    "Welcome " + user.name + " ✓"
+  );
+
+
+  document.getElementById("loginForm").reset();
+
+
+  setTimeout(function() {
+    closeLogin();
+  }, 700);
+}
+
+
+/* =========================
+   LOGGED IN USER
+========================= */
+
+function getLoggedInUser() {
+  return JSON.parse(
+    localStorage.getItem("miniMartLoggedInUser")
+  );
+}
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+function logoutUser() {
+
+  localStorage.removeItem(
+    "miniMartLoggedInUser"
+  );
+
+  showToast("Logged out successfully");
+
+}
+
+
+/* =========================
+   LOGIN CHECK
+========================= */
+
+function isUserLoggedIn() {
+
+  return !!localStorage.getItem(
+    "miniMartLoggedInUser"
+  );
+
+}
