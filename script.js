@@ -63,6 +63,13 @@ document.addEventListener("DOMContentLoaded", function () {
   renderProducts();
   updateCart();
   updateWishlistBadge();
+
+  // Open Login automatically when website starts
+  if (!isUserLoggedIn()) {
+    setTimeout(function () {
+      openLogin();
+    }, 300);
+  }
 });
 
 /* =========================
