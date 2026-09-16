@@ -57,17 +57,17 @@ let searchTerm = "";
 /* =========================
    START
 ========================= */
+
 document.addEventListener("DOMContentLoaded", function () {
   document.getElementById("totalCount").textContent = products.length;
   renderProducts();
   updateCart();
   updateWishlistBadge();
 
-   if (!isUserLoggedIn()) {
   setTimeout(function () {
     openLogin();
   }, 500);
-   }
+});
 
 /* =========================
    PRODUCTS
