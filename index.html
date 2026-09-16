@@ -10,6 +10,11 @@
 </head>
 
 <body>
+  <script>
+  if (!localStorage.getItem("miniMartLoggedInUser")) {
+    document.body.classList.add("login-required");
+  }
+  </script>
 
   <!-- TOP BAR -->
   <div class="top-bar">
