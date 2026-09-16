@@ -63,10 +63,11 @@ document.addEventListener("DOMContentLoaded", function () {
   updateCart();
   updateWishlistBadge();
 
+   if (!isUserLoggedIn()) {
   setTimeout(function () {
     openLogin();
   }, 500);
-});
+   }
 
 /* =========================
    PRODUCTS
