@@ -1522,3 +1522,238 @@ function isUserLoggedIn() {
   );
 
 }
+/* =========================================
+   ORDER TRACKING + DELIVERY LOCATION
+========================================= */
+
+function trackOrder(orderId) {
+
+  let orders =
+    JSON.parse(localStorage.getItem("miniMartOrders")) || [];
+
+  const order = orders.find(function (o) {
+    return String(o.id || o.orderId) === String(orderId);
+  });
+
+  if (!order) {
+    showToast("Order not found");
+    return;
+  }
+
+  let modal = document.getElementById("trackingModal");
+
+  if (!modal) {
+    modal = document.createElement("div");
+    modal.id = "trackingModal";
+    modal.className = "modal";
+    document.body.appendChild(modal);
+  }
+
+  modal.innerHTML = `
+    <div class="modal-card" style="
+      max-width:850px;
+      width:95%;
+      position:relative;
+    ">
+
+      <button
+        class="modal-close"
+        onclick="closeTracking()">
+        ×
+      </button>
+
+      <span class="small-title">LIVE ORDER TRACKING</span>
+
+      <h2>Track Order #${order.id || order.orderId}</h2>
+
+      <div style="
+        margin:20px 0;
+        padding:18px;
+        border-radius:14px;
+        background:#f8fafc;
+      ">
+        <strong>📦 Current Status</strong>
+
+        <div style="
+          font-size:20px;
+          font-weight:800;
+          margin-top:8px;
+        ">
+          ${order.status || "Pending"}
+        </div>
+      </div>
+
+      <!-- TRACKING STEPS -->
+
+      <div style="
+        display:flex;
+        flex-direction:column;
+        gap:14px;
+        margin:25px 0;
+      ">
+
+        <div style="
+          padding:15px;
+          border-radius:12px;
+          background:#dcfce7;
+        ">
+          ✅ <strong>Order Placed</strong>
+          <div style="color:#64748b;">
+            Your order has been received.
+          </div>
+        </div>
+
+        <div style="
+          padding:15px;
+          border-radius:12px;
+          background:#dcfce7;
+        ">
+          📦 <strong>Order Packed</strong>
+          <div style="color:#64748b;">
+            Your package has been packed.
+          </div>
+        </div>
+
+        <div style="
+          padding:15px;
+          border-radius:12px;
+          background:#dbeafe;
+        ">
+          🚚 <strong>Order Shipped</strong>
+          <div style="color:#64748b;">
+            Your order is on the way.
+          </div>
+        </div>
+
+        <div style="
+          padding:18px;
+          border-radius:14px;
+          background:#fef3c7;
+        ">
+          📍 <strong>Current Delivery Location</strong>
+
+          <div style="
+            margin-top:10px;
+            font-size:18px;
+            font-weight:700;
+          ">
+            📍 Mini Mart Delivery Hub
+          </div>
+
+          <div style="
+            margin-top:5px;
+            color:#64748b;
+          ">
+            Your package is currently in transit.
+          </div>
+
+          <button
+            onclick="showDeliveryLocation()"
+            style="
+              margin-top:14px;
+              padding:10px 16px;
+              border:0;
+              border-radius:8px;
+              background:#0f172a;
+              color:white;
+              font-weight:700;
+              cursor:pointer;
+            ">
+            📍 View Location
+          </button>
+        </div>
+
+        <div style="
+          padding:15px;
+          border-radius:12px;
+          background:#f1f5f9;
+        ">
+          🏠 <strong>Out for Delivery</strong>
+          <div style="color:#64748b;">
+            Delivery partner will bring your order to your address.
+          </div>
+        </div>
+
+        <div style="
+          padding:15px;
+          border-radius:12px;
+          background:#f1f5f9;
+        ">
+          ✅ <strong>Delivered</strong>
+          <div style="color:#64748b;">
+            Your order will be marked delivered after delivery.
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ORDER TOTAL -->
+
+      <div style="
+        border-top:1px solid #e2e8f0;
+        padding-top:18px;
+        margin-top:20px;
+      ">
+
+        <div style="
+          display:flex;
+          justify-content:space-between;
+          font-size:18px;
+          font-weight:800;
+        ">
+          <span>Order Total</span>
+
+          <span>
+            $${calculateOrderTotal(order).toFixed(2)}
+          </span>
+        </div>
+
+      </div>
+
+    </div>
+  `;
+
+  modal.classList.add("open");
+}
+
+
+/* =========================
+   ORDER TOTAL
+========================= */
+
+function calculateOrderTotal(order) {
+
+  return (order.items || []).reduce(function (total, item) {
+
+    return total +
+      (Number(item.price) || 0) *
+      (Number(item.quantity) || 1);
+
+  }, 0);
+}
+
+
+/* =========================
+   CLOSE TRACKING
+========================= */
+
+function closeTracking() {
+
+  const modal =
+    document.getElementById("trackingModal");
+
+  if (modal) {
+    modal.classList.remove("open");
+  }
+}
+
+
+/* =========================
+   DEMO DELIVERY LOCATION
+========================= */
+
+function showDeliveryLocation() {
+
+  showToast("📍 Delivery location: Mini Mart Delivery Hub");
+
+}
