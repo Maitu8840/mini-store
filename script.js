@@ -1184,6 +1184,24 @@ function openOrders() {
                               ">
                               📍 Track Order
                             </button>
+                            <button
+  onclick="viewOrderDetails('${
+    order.id ||
+    order.orderId
+  }')"
+  style="
+    margin-top:15px;
+    margin-right:10px;
+    padding:10px 16px;
+    border:0;
+    background:#2563eb;
+    color:white;
+    border-radius:8px;
+    font-weight:700;
+    cursor:pointer;
+  ">
+  👁️ View Order Details
+</button>
 
                             <button
                               onclick="cancelMyOrder('${
@@ -1220,7 +1238,166 @@ function openOrders() {
 
   modal.classList.add("open");
 }
+/* =========================
+   ORDER DETAILS
+========================= */
 
+function viewOrderDetails(orderId) {
+
+  const orders =
+    JSON.parse(
+      localStorage.getItem("miniMartOrders")
+    ) || [];
+
+  const order = orders.find(function(item) {
+    return String(item.id || item.orderId) === String(orderId);
+  });
+
+  if (!order) {
+    showToast("Order details not found");
+    return;
+  }
+
+  const items = order.items || [];
+
+  const total = items.reduce(function(sum, item) {
+    return sum + (Number(item.price) * Number(item.quantity));
+  }, 0);
+
+  let modal = document.getElementById("orderDetailsModal");
+
+  if (!modal) {
+    modal = document.createElement("div");
+    modal.id = "orderDetailsModal";
+    modal.className = "modal";
+    document.body.appendChild(modal);
+  }
+
+  modal.innerHTML = `
+    <div class="modal-card"
+      style="max-width:650px;width:95%;">
+
+      <button
+        class="modal-close"
+        onclick="closeOrderDetails()">
+        ×
+      </button>
+
+      <span class="small-title">
+        ORDER DETAILS
+      </span>
+
+      <h2>
+        Order #${order.id || order.orderId}
+      </h2>
+
+      <div style="
+        margin-top:20px;
+        padding:18px;
+        background:#f8fafc;
+        border-radius:14px;
+      ">
+
+        <h3>🛍️ Ordered Items</h3>
+
+        ${
+          items.map(function(item) {
+            return `
+              <div style="
+                display:flex;
+                justify-content:space-between;
+                padding:12px 0;
+                border-bottom:1px solid #e2e8f0;
+              ">
+                <span>
+                  ${item.name} × ${item.quantity}
+                </span>
+
+                <strong>
+                  $${(
+                    Number(item.price) *
+                    Number(item.quantity)
+                  ).toFixed(2)}
+                </strong>
+              </div>
+            `;
+          }).join("")
+        }
+
+        <div style="
+          display:flex;
+          justify-content:space-between;
+          margin-top:18px;
+          font-size:20px;
+        ">
+          <strong>Total</strong>
+          <strong>$${total.toFixed(2)}</strong>
+        </div>
+
+      </div>
+
+      <div style="
+        margin-top:18px;
+        padding:18px;
+        background:#f8fafc;
+        border-radius:14px;
+      ">
+
+        <h3>👤 Customer Details</h3>
+
+        <p>
+          <strong>Name:</strong>
+          ${order.customer?.name || "Not available"}
+        </p>
+
+        <p>
+          <strong>Phone:</strong>
+          ${order.customer?.phone || "Not available"}
+        </p>
+
+      </div>
+
+      <div style="
+        margin-top:18px;
+        padding:18px;
+        background:#f8fafc;
+        border-radius:14px;
+      ">
+
+        <h3>📦 Order Status</h3>
+
+        <p>
+          <strong>Status:</strong>
+          ${order.status || "Pending"}
+        </p>
+
+        <p>
+          <strong>Payment:</strong>
+          ${order.paymentStatus || "Pending"}
+        </p>
+
+      </div>
+
+    </div>
+  `;
+
+  modal.classList.add("open");
+}
+
+
+/* =========================
+   CLOSE ORDER DETAILS
+========================= */
+
+function closeOrderDetails() {
+
+  const modal =
+    document.getElementById("orderDetailsModal");
+
+  if (modal) {
+    modal.classList.remove("open");
+  }
+}
 /* =========================
    CLOSE ORDERS
 ========================= */
