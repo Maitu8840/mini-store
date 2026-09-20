@@ -671,6 +671,145 @@ function closeSuccess() {
     .getElementById("successModal")
     .classList.remove("open");
 }
+/* =========================
+   PAYMENT DETAILS
+========================= */
+
+function showPaymentDetails() {
+
+  const orders =
+    JSON.parse(
+      localStorage.getItem("miniMartOrders")
+    ) || [];
+
+  if (orders.length === 0) {
+    showToast("No order found");
+    return;
+  }
+
+  const order = orders[orders.length - 1];
+
+  const items = order.items || [];
+
+  const total = items.reduce(function(sum, item) {
+    return sum +
+      Number(item.price) * Number(item.quantity);
+  }, 0);
+
+  let modal =
+    document.getElementById("paymentDetailsModal");
+
+  if (!modal) {
+    modal = document.createElement("div");
+    modal.id = "paymentDetailsModal";
+    modal.className = "modal";
+    document.body.appendChild(modal);
+  }
+
+  modal.innerHTML = `
+    <div class="modal-card"
+      style="max-width:600px;width:95%;">
+
+      <button
+        class="modal-close"
+        onclick="closePaymentDetails()">
+        ×
+      </button>
+
+      <div style="
+        text-align:center;
+        padding:10px 5px 20px;
+      ">
+
+        <div style="
+          font-size:55px;
+          margin-bottom:10px;
+        ">
+          ✅
+        </div>
+
+        <h2>Payment Successful</h2>
+
+        <p style="
+          color:#64748b;
+          margin-top:8px;
+        ">
+          Your order has been placed successfully.
+        </p>
+
+      </div>
+
+      <div style="
+        background:#f8fafc;
+        padding:18px;
+        border-radius:14px;
+        margin-top:10px;
+      ">
+
+        <p>
+          <strong>📦 Order ID:</strong>
+          MM-${order.id || order.orderId}
+        </p>
+
+        <p>
+          <strong>💳 Payment Method:</strong>
+          Online Payment
+        </p>
+
+        <p>
+          <strong>💰 Amount Paid:</strong>
+          $${total.toFixed(2)}
+        </p>
+
+        <p>
+          <strong>💳 Payment Status:</strong>
+          ${order.paymentStatus || "Pending"}
+        </p>
+
+        <p>
+          <strong>🚚 Order Status:</strong>
+          ${order.status || "Pending"}
+        </p>
+
+      </div>
+
+      <button
+        onclick="closePaymentDetails()"
+        style="
+          width:100%;
+          margin-top:20px;
+          padding:14px;
+          border:0;
+          border-radius:10px;
+          background:#0f172a;
+          color:white;
+          font-size:16px;
+          font-weight:700;
+          cursor:pointer;
+        ">
+        Continue Shopping
+      </button>
+
+    </div>
+  `;
+
+  modal.classList.add("open");
+}
+
+
+/* =========================
+   CLOSE PAYMENT DETAILS
+========================= */
+
+function closePaymentDetails() {
+
+  const modal =
+    document.getElementById("paymentDetailsModal");
+
+  if (modal) {
+    modal.classList.remove("open");
+  }
+}
 
 /* =========================
    TOAST
