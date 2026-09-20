@@ -1169,14 +1169,56 @@ function openOrders() {
                       </div>
 
                       ${
-                        status !== "Cancelled" &&
-                        status !== "Delivered"
-                          ? `
-                            <button
-                              onclick="cancelMyOrder('${
-                                order.id ||
-                                order.orderId
-                              }')"
+  status !== "Cancelled" &&
+  status !== "Delivered"
+    ? `
+        <button
+          onclick="trackOrder('${
+            order.id ||
+            order.orderId
+          }')"
+          style="
+            margin-top:15px;
+            margin-right:10px;
+            padding:10px 16px;
+            border:0;
+            background:#0f172a;
+            color:white;
+            border-radius:8px;
+            font-weight:700;
+            cursor:pointer;
+          ">
+          📍 Track Order
+        </button>
+
+        <button
+          onclick="cancelMyOrder('${
+            order.id ||
+            order.orderId
+          }')"
+          style="
+            margin-top:15px;
+            padding:10px 16px;
+            border:1px solid #ef4444;
+            background:white;
+            color:#ef4444;
+            border-radius:8px;
+            font-weight:700;
+            cursor:pointer;
+          ">
+          Cancel Order
+        </button>
+      `
+    : ""
+                      }
+                        
+                  
+                        
+                        
+                              
+                           
+                              
+                        
                               style="
                                 margin-top:15px;
                                 padding:10px 16px;
