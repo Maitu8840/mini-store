@@ -537,8 +537,8 @@ function closeCheckout() {
     .classList.remove("open");
 }
 
-/* =========================
-   PLACE ORDER
+/*/* =========================
+   PLACE ORDER + PAYMENT
 ========================= */
 
 async function placeOrder(event) {
@@ -562,13 +562,17 @@ async function placeOrder(event) {
   const pincode =
     document.getElementById("pincode").value.trim();
 
+  const paymentMethod =
+    document.getElementById("paymentMethod").value;
+
   if (
     !firstName ||
     !lastName ||
     !email ||
     !address ||
     !city ||
-    !pincode
+    !pincode ||
+    !paymentMethod
   ) {
     showToast("Please complete all fields");
     return;
@@ -600,8 +604,19 @@ async function placeOrder(event) {
     pincode: pincode
   };
 
+  const total = orderItems.reduce(function (sum, item) {
+    return sum +
+      Number(item.price) * Number(item.quantity);
+  }, 0);
+
   try {
-    showToast("Placing your order...");
+
+    showToast("Processing payment...");
+
+    /* PAYMENT SIMULATION */
+    await new Promise(function (resolve) {
+      setTimeout(resolve, 1200);
+    });
 
     const response = await fetch(
       API_URL + "/api/orders",
@@ -612,7 +627,10 @@ async function placeOrder(event) {
         },
         body: JSON.stringify({
           items: orderItems,
-          customer: customer
+          customer: customer,
+          paymentMethod: paymentMethod,
+          paymentStatus: "Paid",
+          total: total
         })
       }
     );
@@ -624,6 +642,15 @@ async function placeOrder(event) {
         data.message || "Order failed"
       );
     }
+
+    /* SAVE PAYMENT DATA */
+    data.order.paymentMethod = paymentMethod;
+    data.order.paymentStatus =
+      paymentMethod === "COD"
+        ? "Pending"
+        : "Paid";
+
+    data.order.total = total;
 
     const orders =
       JSON.parse(
@@ -643,24 +670,167 @@ async function placeOrder(event) {
     updateCart();
     closeCheckout();
 
-    document.getElementById("orderNumber").textContent =
-      "Order Number: MM-" + data.order.id;
-
-    document
-      .getElementById("successModal")
-      .classList.add("open");
+    /* SHOW PAYMENT SUCCESS */
+    showPaymentSuccess(
+      data.order,
+      total,
+      paymentMethod
+    );
 
     document
       .getElementById("checkoutForm")
       .reset();
 
   } catch (error) {
+
     console.error(error);
+
     showToast(
-      "Order failed. Please try again."
+      "Payment failed. Please try again."
     );
   }
 }
+
+
+/* =========================
+   PAYMENT SUCCESS
+========================= */
+
+function showPaymentSuccess(
+  order,
+  total,
+  paymentMethod
+) {
+
+  let modal =
+    document.getElementById(
+      "paymentSuccessModal"
+    );
+
+  if (!modal) {
+
+    modal = document.createElement("div");
+
+    modal.id =
+      "paymentSuccessModal";
+
+    modal.className =
+      "modal";
+
+    document.body.appendChild(modal);
+  }
+
+  const paymentText =
+    paymentMethod === "COD"
+      ? "Cash on Delivery"
+      : paymentMethod === "UPI"
+      ? "UPI"
+      : "Credit / Debit Card";
+
+  const paymentStatus =
+    paymentMethod === "COD"
+      ? "Pending"
+      : "Paid";
+
+  modal.innerHTML = `
+    <div class="modal-card"
+      style="
+        max-width:600px;
+        width:95%;
+        text-align:center;
+      ">
+
+      <div style="
+        font-size:65px;
+        margin-bottom:10px;
+      ">
+        ✅
+      </div>
+
+      <h2>
+        Payment Successful
+      </h2>
+
+      <p style="
+        color:#64748b;
+        margin-top:10px;
+      ">
+        Your order has been placed successfully.
+      </p>
+
+      <div style="
+        margin-top:25px;
+        padding:20px;
+        background:#f8fafc;
+        border-radius:15px;
+        text-align:left;
+      ">
+
+        <p>
+          <strong>📦 Order ID:</strong>
+          MM-${order.id}
+        </p>
+
+        <p>
+          <strong>💳 Payment Method:</strong>
+          ${paymentText}
+        </p>
+
+        <p>
+          <strong>💰 Total Amount:</strong>
+          $${Number(total).toFixed(2)}
+        </p>
+
+        <p>
+          <strong>💳 Payment Status:</strong>
+          ${paymentStatus}
+        </p>
+
+        <p>
+          <strong>📦 Order Status:</strong>
+          ${order.status || "Pending"}
+        </p>
+
+      </div>
+
+      <button
+        class="primary-btn"
+        style="
+          width:100%;
+          margin-top:20px;
+        "
+        onclick="
+          closePaymentSuccess();
+          openOrders();
+        "
+      >
+        View My Order →
+      </button>
+
+    </div>
+  `;
+
+  modal.classList.add("open");
+}
+
+
+/* =========================
+   CLOSE PAYMENT SUCCESS
+========================= */
+
+function closePaymentSuccess() {
+
+  const modal =
+    document.getElementById(
+      "paymentSuccessModal"
+    );
+
+  if (modal) {
+    modal.classList.remove("open");
+  }
+}
+
+async
 
 /* =========================
    SUCCESS
