@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>MINI MART | Children Collection</title>
+
+  <link rel="stylesheet" href="Style.css">
+</head>
+
+<body>
+
+  <!-- TOP BAR -->
+  <div class="top-bar">
+    CHILDREN'S COLLECTION • FREE SHIPPING OVER $75 • 30-DAY RETURNS
+  </div>
+
+
+  <!-- HEADER -->
+  <header class="header">
+
+    <div class="container nav">
+
+      <a href="index.html" class="logo">
+        MINI <span>MART</span>
+      </a>
+
+
+      <div class="search-box">
+
+        <span>🔎</span>
+
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search children's products..."
+        >
+
+      </div>
+
+
+      <div class="nav-actions">
+
+        <a
+          href="index.html"
+          class="icon-btn"
+          style="text-decoration:none;">
+          🏠 Home
+        </a>
+
+
+        <button
+          class="cart-btn"
+          onclick="window.location.href='index.html'">
+          🛒 Cart
+        </button>
+
+      </div>
+
+    </div>
+
+  </header>
+
+
+  <!-- HERO -->
+  <section class="hero">
+
+    <div class="container hero-content">
+
+      <div class="hero-text">
+
+        <span class="hero-label">
+          CHILDREN'S COLLECTION
+        </span>
+
+
+        <h1>
+          Little Styles.<br>
+          Big Smiles.
+        </h1>
+
+
+        <p>
+          Discover comfortable, colorful and
+          stylish everyday essentials for children.
+        </p>
+
+
+        <button
+          class="primary-btn"
+          onclick="scrollToProducts()">
+          Shop Children's Collection →
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- PRODUCTS -->
+  <main
+    class="container products-section"
+    id="products">
+
+
+    <div class="section-heading">
+
+      <div>
+
+        <span class="small-title">
+          CHILDREN'S COLLECTION
+        </span>
+
+        <h2>
+          Kids Everyday Essentials
+        </h2>
+
+      </div>
+
+
+      <div class="sort-box">
+
+        <label for="sortSelect">
+          Sort:
+        </label>
+
+
+        <select
+          id="sortSelect"
+          onchange="sortChildrenProducts()">
+
+          <option value="featured">
+            Featured
+          </option>
+
+          <option value="low">
+            Price Low-High
+          </option>
+
+          <option value="high">
+            Price High-Low
+          </option>
+
+          <option value="name">
+            Name A-Z
+          </option>
+
+        </select>
+
+      </div>
+
+    </div>
+
+
+    <!-- CATEGORY FILTER -->
+
+    <div class="filters">
+
+      <button
+        class="filter-btn active"
+        onclick="filterChildren('All', this)">
+        All Children
+      </button>
+
+
+      <button
+        class="filter-btn"
+        onclick="filterChildren('T-Shirts', this)">
+        T-Shirts
+      </button>
+
+
+      <button
+        class="filter-btn"
+        onclick="filterChildren('Dresses', this)">
+        Dresses
+      </button>
+
+
+      <button
+        class="filter-btn"
+        onclick="filterChildren('Pants', this)">
+        Pants
+      </button>
+
+
+      <button
+        class="filter-btn"
+        onclick="filterChildren('Jackets', this)">
+        Jackets
+      </button>
+
+
+      <button
+        class="filter-btn"
+        onclick="filterChildren('Shoes', this)">
+        Shoes
+      </button>
+
+    </div>
+
+
+    <!-- PRODUCT GRID -->
+
+    <div
+      id="childrenProductGrid"
+      class="product-grid">
+    </div>
+
+  </main>
+
+
+  <!-- FOOTER -->
+
+  <footer class="footer">
+
+    <div class="container footer-content">
+
+
+      <div>
+
+        <div class="footer-logo">
+          MINI <span>MART</span>
+        </div>
+
+
+        <p>
+          Comfortable and stylish essentials
+          for growing kids.
+        </p>
+
+      </div>
+
+
+      <div class="footer-links">
+
+        <a href="index.html">
+          Home
+        </a>
+
+
+        <a href="men.html">
+          Men
+        </a>
+
+
+        <a href="women.html">
+          Women
+        </a>
+
+
+        <a href="children.html">
+          Children
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <div class="copyright">
+
+      © 2026 Mini Mart Apparel Ltd.
+      All rights reserved.
+
+    </div>
+
+  </footer>
+
+
+<script>
+
+  const childrenProducts = [
+
+    {
+      id: 301,
+      name: "Kids Classic T-Shirt",
+      category: "T-Shirts",
+      price: 18,
+      image: "https://images.unsplash.com/photo-1622290291468-a28f7a7dc6a8?auto=format&fit=crop&w=600&q=80"
+    },
+
+
+    {
+      id: 302,
+      name: "Colorful Kids T-Shirt",
+      category: "T-Shirts",
+      price: 20,
+      image: "https://images.unsplash.com/photo-1519238263530-99bdd11df2ea?auto=format&fit=crop&w=600&q=80"
+    },
+
+
+    {
+      id: 303,
+      name: "Cute Summer Dress",
+      category: "Dresses",
+      price: 30,
+      image: "https://images.unsplash.com/photo-1518831959646-742c3a14ebf7?auto=format&fit=crop&w=600&q=80"
+    },
+
+
+    {
+      id: 304,
+      name: "Floral Kids Dress",
+      category: "Dresses",
+      price: 35,
+      image: "https://images.unsplash.com/photo-1607453998774-d533f65dac99?auto=format&fit=crop&w=600&q=80"
+    },
+
+
+    {
+      id: 305,
+      name: "Kids Casual Pants",
+      category: "Pants",
+      price: 25,
+      image: "https://images.unsplash.com/photo-1503919545889-aef636e10ad4?auto=format&fit=crop&w=600&q=80"
+    },
+
+
+    {
+      id: 306,
+      name: "Comfort Kids Joggers",
+      category: "Pants",
+      price: 28,
+      image: "https://images.unsplash.com/photo-1519238263530-99bdd11df2ea?auto=format&fit=crop&w=600&q=80"
+    },
+
+
+    {
+      id: 307,
+      name: "Kids Denim Jacket",
+      category: "Jackets",
+      price: 42,
+      image: "https://images.unsplash.com/photo-1519457431-44ccd64a579b?auto=format&fit=crop&w=600&q=80"
+    },
+
+
+    {
+      id: 308,
+      name: "Warm Kids Jacket",
+      category: "Jackets",
+      price: 48,
+      image: "https://images.unsplash.com/photo-1544923246-77307dd628b0?auto=format&fit=crop&w=600&q=80"
+    },
+
+
+    {
+      id: 309,
+      name: "Kids Casual Sneakers",
+      category: "Shoes",
+      price: 38,
+      image: "https://images.unsplash.com/photo-1514989940723-e8e51635b782?auto=format&fit=crop&w=600&q=80"
+    },
+
+
+    {
+      id: 310,
+      name: "Kids Sport Shoes",
+      category: "Shoes",
+      price: 45,
+      image: "https://images.unsplash.com/photo-1551107696-a4b0c5a0d9a2?auto=format&fit=crop&w=600&q=80"
+    }
+
+  ];
+
+
+  let currentChildrenCategory = "All";
+
+
+  function displayChildrenProducts() {
+
+    const grid =
+      document.getElementById(
+        "childrenProductGrid"
+      );
+
+
+    const search =
+      document
+        .getElementById("searchInput")
+        .value
+        .toLowerCase();
+
+
+    let products =
+      childrenProducts.filter(product => {
+
+        const categoryMatch =
+          currentChildrenCategory === "All" ||
+          product.category === currentChildrenCategory;
+
+
+        const searchMatch =
+          product.name
+            .toLowerCase()
+            .includes(search);
+
+
+        return categoryMatch && searchMatch;
+
+      });
+
+
+    grid.innerHTML = "";
+
+
+    products.forEach(product => {
+
+      grid.innerHTML += `
+
+        <div class="product-card">
+
+          <div class="product-image">
+
+            <img
+              src="${product.image}"
+              alt="${product.name}"
+              style="
+                width:100%;
+                height:300px;
+                object-fit:cover;
+              "
+            >
+
+          </div>
+
+
+          <div class="product-info">
+
+            <span class="small-title">
+              ${product.category}
+            </span>
+
+
+            <h3>
+              ${product.name}
+            </h3>
+
+
+            <strong>
+              $${product.price}
+            </strong>
+
+
+            <button
+              class="primary-btn"
+              style="margin-top:12px;"
+              onclick="addChildrenToCart(${product.id})">
+
+              Add to Bag
+
+            </button>
+
+          </div>
+
+        </div>
+
+      `;
+
+    });
+
+  }
+
+
+  function filterChildren(category, button) {
+
+    currentChildrenCategory = category;
+
+
+    document
+      .querySelectorAll(".filter-btn")
+      .forEach(btn =>
+        btn.classList.remove("active")
+      );
+
+
+    button.classList.add("active");
+
+
+    displayChildrenProducts();
+
+  }
+
+
+  function sortChildrenProducts() {
+
+    const value =
+      document
+        .getElementById("sortSelect")
+        .value;
+
+
+    if (value === "low") {
+
+      childrenProducts.sort(
+        (a, b) => a.price - b.price
+      );
+
+    }
+
+
+    if (value === "high") {
+
+      childrenProducts.sort(
+        (a, b) => b.price - a.price
+      );
+
+    }
+
+
+    if (value === "name") {
+
+      childrenProducts.sort(
+        (a, b) =>
+          a.name.localeCompare(b.name)
+      );
+
+    }
+
+
+    displayChildrenProducts();
+
+  }
+
+
+  document
+    .getElementById("searchInput")
+    .addEventListener(
+      "input",
+      displayChildrenProducts
+    );
+
+
+  function scrollToProducts() {
+
+    document
+      .getElementById("products")
+      .scrollIntoView({
+        behavior: "smooth"
+      });
+
+  }
+
+
+  function addChildrenToCart(id) {
+
+    const product =
+      childrenProducts.find(
+        item => item.id === id
+      );
+
+
+    let cart =
+      JSON.parse(
+        localStorage.getItem("miniMartCart")
+      ) || [];
+
+
+    cart.push(product);
+
+
+    localStorage.setItem(
+      "miniMartCart",
+      JSON.stringify(cart)
+    );
+
+
+    alert(
+      product.name +
+      " added to cart!"
+    );
+
+  }
+
+
+  displayChildrenProducts();
+
+</script>
+
+</body>
+  </html>
