@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>MINI MART | Women Collection</title>
+
+  <link rel="stylesheet" href="Style.css">
+</head>
+
+<body>
+
+  <!-- TOP BAR -->
+  <div class="top-bar">
+    WOMEN'S COLLECTION • FREE SHIPPING OVER $75 • 30-DAY RETURNS
+  </div>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="container nav">
+
+      <a href="index.html" class="logo">
+        MINI <span>MART</span>
+      </a>
+
+      <div class="search-box">
+        <span>🔎</span>
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search women's products..."
+        >
+      </div>
+
+      <div class="nav-actions">
+
+        <a href="index.html"
+           class="icon-btn"
+           style="text-decoration:none;">
+          🏠 Home
+        </a>
+
+        <button
+          class="cart-btn"
+          onclick="window.location.href='index.html'">
+          🛒 Cart
+        </button>
+
+      </div>
+
+    </div>
+  </header>
+
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container hero-content">
+
+      <div class="hero-text">
+
+        <span class="hero-label">
+          WOMEN'S COLLECTION
+        </span>
+
+        <h1>
+          Elegant Style.<br>
+          Everyday Comfort.
+        </h1>
+
+        <p>
+          Discover stylish and comfortable
+          everyday essentials made for women.
+        </p>
+
+        <button
+          class="primary-btn"
+          onclick="scrollToProducts()">
+          Shop Women's Collection →
+        </button>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- PRODUCTS -->
+  <main class="container products-section"
+        id="products">
+
+    <div class="section-heading">
+
+      <div>
+
+        <span class="small-title">
+          WOMEN'S COLLECTION
+        </span>
+
+        <h2>
+          Women's Everyday Essentials
+        </h2>
+
+      </div>
+
+      <div class="sort-box">
+
+        <label for="sortSelect">
+          Sort:
+        </label>
+
+        <select
+          id="sortSelect"
+          onchange="sortWomenProducts()">
+
+          <option value="featured">
+            Featured
+          </option>
+
+          <option value="low">
+            Price Low-High
+          </option>
+
+          <option value="high">
+            Price High-Low
+          </option>
+
+          <option value="name">
+            Name A-Z
+          </option>
+
+        </select>
+
+      </div>
+
+    </div>
+
+
+    <!-- CATEGORY FILTER -->
+
+    <div class="filters">
+
+      <button
+        class="filter-btn active"
+        onclick="filterWomen('All', this)">
+        All Women
+      </button>
+
+      <button
+        class="filter-btn"
+        onclick="filterWomen('Tops', this)">
+        Tops
+      </button>
+
+      <button
+        class="filter-btn"
+        onclick="filterWomen('Dresses', this)">
+        Dresses
+      </button>
+
+      <button
+        class="filter-btn"
+        onclick="filterWomen('Jeans', this)">
+        Jeans
+      </button>
+
+      <button
+        class="filter-btn"
+        onclick="filterWomen('Jackets', this)">
+        Jackets
+      </button>
+
+      <button
+        class="filter-btn"
+        onclick="filterWomen('Shoes', this)">
+        Shoes
+      </button>
+
+    </div>
+
+
+    <!-- PRODUCT GRID -->
+
+    <div
+      id="womenProductGrid"
+      class="product-grid">
+    </div>
+
+  </main>
+
+
+  <!-- FOOTER -->
+
+  <footer class="footer">
+
+    <div class="container footer-content">
+
+      <div>
+
+        <div class="footer-logo">
+          MINI <span>MART</span>
+        </div>
+
+        <p>
+          Stylish everyday essentials for modern women.
+        </p>
+
+      </div>
+
+
+      <div class="footer-links">
+
+        <a href="index.html">
+          Home
+        </a>
+
+        <a href="men.html">
+          Men
+        </a>
+
+        <a href="women.html">
+          Women
+        </a>
+
+        <a href="children.html">
+          Children
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <div class="copyright">
+      © 2026 Mini Mart Apparel Ltd.
+      All rights reserved.
+    </div>
+
+  </footer>
+
+
+<script>
+
+  const womenProducts = [
+
+    {
+      id: 201,
+      name: "Classic White Top",
+      category: "Tops",
+      price: 28,
+      image: "https://images.unsplash.com/photo-1485968579580-b6d095142e6e?auto=format&fit=crop&w=600&q=80"
+    },
+
+    {
+      id: 202,
+      name: "Casual Summer Top",
+      category: "Tops",
+      price: 32,
+      image: "https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?auto=format&fit=crop&w=600&q=80"
+    },
+
+    {
+      id: 203,
+      name: "Elegant Black Dress",
+      category: "Dresses",
+      price: 55,
+      image: "https://images.unsplash.com/photo-1539008835657-9e8e9680c956?auto=format&fit=crop&w=600&q=80"
+    },
+
+    {
+      id: 204,
+      name: "Floral Summer Dress",
+      category: "Dresses",
+      price: 62,
+      image: "https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=600&q=80"
+    },
+
+    {
+      id: 205,
+      name: "Blue Slim Jeans",
+      category: "Jeans",
+      price: 52,
+      image: "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=600&q=80"
+    },
+
+    {
+      id: 206,
+      name: "High Waist Jeans",
+      category: "Jeans",
+      price: 58,
+      image: "https://images.unsplash.com/photo-1584370848010-d7fe6bc767ec?auto=format&fit=crop&w=600&q=80"
+    },
+
+    {
+      id: 207,
+      name: "Classic Denim Jacket",
+      category: "Jackets",
+      price: 68,
+      image: "https://images.unsplash.com/photo-1543076447-215ad9ba6923?auto=format&fit=crop&w=600&q=80"
+    },
+
+    {
+      id: 208,
+      name: "Elegant Winter Jacket",
+      category: "Jackets",
+      price: 82,
+      image: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&w=600&q=80"
+    },
+
+    {
+      id: 209,
+      name: "White Fashion Sneakers",
+      category: "Shoes",
+      price: 65,
+      image: "https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=600&q=80"
+    },
+
+    {
+      id: 210,
+      name: "Casual Beige Shoes",
+      category: "Shoes",
+      price: 72,
+      image: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=600&q=80"
+    }
+
+  ];
+
+
+  let currentWomenCategory = "All";
+
+
+  function displayWomenProducts() {
+
+    const grid =
+      document.getElementById("womenProductGrid");
+
+    const search =
+      document
+        .getElementById("searchInput")
+        .value
+        .toLowerCase();
+
+    let products =
+      womenProducts.filter(product => {
+
+        const categoryMatch =
+          currentWomenCategory === "All" ||
+          product.category === currentWomenCategory;
+
+        const searchMatch =
+          product.name
+            .toLowerCase()
+            .includes(search);
+
+        return categoryMatch && searchMatch;
+
+      });
+
+
+    grid.innerHTML = "";
+
+
+    products.forEach(product => {
+
+      grid.innerHTML += `
+
+        <div class="product-card">
+
+          <div class="product-image">
+
+            <img
+              src="${product.image}"
+              alt="${product.name}"
+              style="
+                width:100%;
+                height:300px;
+                object-fit:cover;
+              "
+            >
+
+          </div>
+
+          <div class="product-info">
+
+            <span class="small-title">
+              ${product.category}
+            </span>
+
+            <h3>
+              ${product.name}
+            </h3>
+
+            <strong>
+              $${product.price}
+            </strong>
+
+            <button
+              class="primary-btn"
+              style="margin-top:12px;"
+              onclick="addWomenToCart(${product.id})">
+
+              Add to Bag
+
+            </button>
+
+          </div>
+
+        </div>
+
+      `;
+
+    });
+
+  }
+
+
+  function filterWomen(category, button) {
+
+    currentWomenCategory = category;
+
+    document
+      .querySelectorAll(".filter-btn")
+      .forEach(btn =>
+        btn.classList.remove("active")
+      );
+
+    button.classList.add("active");
+
+    displayWomenProducts();
+
+  }
+
+
+  function sortWomenProducts() {
+
+    const value =
+      document.getElementById("sortSelect").value;
+
+    if (value === "low") {
+
+      womenProducts.sort(
+        (a, b) => a.price - b.price
+      );
+
+    }
+
+    if (value === "high") {
+
+      womenProducts.sort(
+        (a, b) => b.price - a.price
+      );
+
+    }
+
+    if (value === "name") {
+
+      womenProducts.sort(
+        (a, b) =>
+          a.name.localeCompare(b.name)
+      );
+
+    }
+
+    displayWomenProducts();
+
+  }
+
+
+  document
+    .getElementById("searchInput")
+    .addEventListener(
+      "input",
+      displayWomenProducts
+    );
+
+
+  function scrollToProducts() {
+
+    document
+      .getElementById("products")
+      .scrollIntoView({
+        behavior: "smooth"
+      });
+
+  }
+
+
+  function addWomenToCart(id) {
+
+    const product =
+      womenProducts.find(
+        item => item.id === id
+      );
+
+    let cart =
+      JSON.parse(
+        localStorage.getItem("miniMartCart")
+      ) || [];
+
+    cart.push(product);
+
+    localStorage.setItem(
+      "miniMartCart",
+      JSON.stringify(cart)
+    );
+
+    alert(
+      product.name + " added to cart!"
+    );
+
+  }
+
+
+  displayWomenProducts();
+
+</script>
+
+</body>
+  </html>
