@@ -1,1 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <title>MINI MART | Men Collection</title>
+
+  <link rel="stylesheet" href="Style.css">
+</head>
+
+<body>
+
+  <!-- TOP BAR -->
+  <div class="top-bar">
+    MEN'S COLLECTION • FREE SHIPPING OVER $75 • 30-DAY RETURNS
+  </div>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="container nav">
+
+      <a href="index.html" class="logo">
+        MINI <span>MART</span>
+      </a>
+
+      <div class="search-box">
+        <span>🔎</span>
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search men's products..."
+        >
+      </div>
+
+      <div class="nav-actions">
+
+        <a href="index.html" class="icon-btn"
+           style="text-decoration:none;">
+          🏠 Home
+        </a>
+
+        <button class="cart-btn"
+                onclick="window.location.href='index.html'">
+          🛒 Cart
+        </button>
+
+      </div>
+
+    </div>
+  </header>
+
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container hero-content">
+
+      <div class="hero-text">
+
+        <span class="hero-label">
+          MEN'S COLLECTION
+        </span>
+
+        <h1>
+          Modern Style.<br>
+          Everyday Comfort.
+        </h1>
+
+        <p>
+          Explore our men's collection featuring
+          comfortable and stylish everyday essentials.
+        </p>
+
+        <button
+          class="primary-btn"
+          onclick="scrollToProducts()">
+          Shop Men's Collection →
+        </button>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- PRODUCTS -->
+  <main class="container products-section"
+        id="products">
+
+    <div class="section-heading">
+
+      <div>
+        <span class="small-title">
+          MEN'S COLLECTION
+        </span>
+
+        <h2>
+          Men's Everyday Essentials
+        </h2>
+      </div>
+
+      <div class="sort-box">
+
+        <label for="sortSelect">
+          Sort:
+        </label>
+
+        <select id="sortSelect"
+                onchange="sortMenProducts()">
+
+          <option value="featured">
+            Featured
+          </option>
+
+          <option value="low">
+            Price Low-High
+          </option>
+
+          <option value="high">
+            Price High-Low
+          </option>
+
+          <option value="name">
+            Name A-Z
+          </option>
+
+        </select>
+
+      </div>
+
+    </div>
+
+
+    <!-- CATEGORY FILTER -->
+
+    <div class="filters">
+
+      <button
+        class="filter-btn active"
+        onclick="filterMen('All', this)">
+        All Men
+      </button>
+
+      <button
+        class="filter-btn"
+        onclick="filterMen('T-Shirts', this)">
+        T-Shirts
+      </button>
+
+      <button
+        class="filter-btn"
+        onclick="filterMen('Shirts', this)">
+        Shirts
+      </button>
+
+      <button
+        class="filter-btn"
+        onclick="filterMen('Jeans', this)">
+        Jeans
+      </button>
+
+      <button
+        class="filter-btn"
+        onclick="filterMen('Jackets', this)">
+        Jackets
+      </button>
+
+      <button
+        class="filter-btn"
+        onclick="filterMen('Shoes', this)">
+        Shoes
+      </button>
+
+    </div>
+
+
+    <!-- PRODUCT GRID -->
+
+    <div id="menProductGrid"
+         class="product-grid">
+    </div>
+
+  </main>
+
+
+  <!-- FOOTER -->
+
+  <footer class="footer">
+
+    <div class="container footer-content">
+
+      <div>
+
+        <div class="footer-logo">
+          MINI <span>MART</span>
+        </div>
+
+        <p>
+          Men's fashion for modern everyday life.
+        </p>
+
+      </div>
+
+
+      <div class="footer-links">
+
+        <a href="index.html">
+          Home
+        </a>
+
+        <a href="men.html">
+          Men
+        </a>
+
+        <a href="women.html">
+          Women
+        </a>
+
+        <a href="children.html">
+          Children
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <div class="copyright">
+
+      © 2026 Mini Mart Apparel Ltd.
+      All rights reserved.
+
+    </div>
+
+  </footer>
+
+
+<script>
+
+  const menProducts = [
+
+    {
+      id: 101,
+      name: "Classic Black T-Shirt",
+      category: "T-Shirts",
+      price: 25,
+      image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=600&q=80"
+    },
+
+    {
+      id: 102,
+      name: "Premium White T-Shirt",
+      category: "T-Shirts",
+      price: 28,
+      image: "https://images.unsplash.com/photo-1503341504253-dff4815485f1?auto=format&fit=crop&w=600&q=80"
+    },
+
+    {
+      id: 103,
+      name: "Casual Blue Shirt",
+      category: "Shirts",
+      price: 42,
+      image: "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?auto=format&fit=crop&w=600&q=80"
+    },
+
+    {
+      id: 104,
+      name: "Classic Denim Shirt",
+      category: "Shirts",
+      price: 45,
+      image: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&w=600&q=80"
+    },
+
+    {
+      id: 105,
+      name: "Slim Fit Blue Jeans",
+      category: "Jeans",
+      price: 55,
+      image: "https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=600&q=80"
+    },
+
+    {
+      id: 106,
+      name: "Classic Denim Jeans",
+      category: "Jeans",
+      price: 60,
+      image: "https://images.unsplash.com/photo-1475178626620-a4d074967452?auto=format&fit=crop&w=600&q=80"
+    },
+
+    {
+      id: 107,
+      name: "Casual Bomber Jacket",
+      category: "Jackets",
+      price: 75,
+      image: "https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=600&q=80"
+    },
+
+    {
+      id: 108,
+      name: "Winter Black Jacket",
+      category: "Jackets",
+      price: 85,
+      image: "https://images.unsplash.com/photo-1548883354-7622d03aca27?auto=format&fit=crop&w=600&q=80"
+    },
+
+    {
+      id: 109,
+      name: "White Casual Sneakers",
+      category: "Shoes",
+      price: 65,
+      image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=600&q=80"
+    },
+
+    {
+      id: 110,
+      name: "Black Running Shoes",
+      category: "Shoes",
+      price: 70,
+      image: "https://images.unsplash.com/photo-1552346154-21d32810aba3?auto=format&fit=crop&w=600&q=80"
+    }
+
+  ];
+
+
+  let currentMenCategory = "All";
+
+
+  function displayMenProducts() {
+
+    const grid =
+      document.getElementById("menProductGrid");
+
+    const search =
+      document
+      .getElementById("searchInput")
+      .value
+      .toLowerCase();
+
+    let products =
+      menProducts.filter(product => {
+
+        const categoryMatch =
+          currentMenCategory === "All" ||
+          product.category === currentMenCategory;
+
+        const searchMatch =
+          product.name
+          .toLowerCase()
+          .includes(search);
+
+        return categoryMatch && searchMatch;
+
+      });
+
+
+    grid.innerHTML = "";
+
+
+    products.forEach(product => {
+
+      grid.innerHTML += `
+
+        <div class="product-card">
+
+          <div class="product-image">
+
+            <img
+              src="${product.image}"
+              alt="${product.name}"
+              style="
+                width:100%;
+                height:300px;
+                object-fit:cover;
+              "
+            >
+
+          </div>
+
+          <div class="product-info">
+
+            <span class="small-title">
+              ${product.category}
+            </span>
+
+            <h3>
+              ${product.name}
+            </h3>
+
+            <strong>
+              $${product.price}
+            </strong>
+
+            <button
+              class="primary-btn"
+              style="margin-top:12px;"
+              onclick="addMenToCart(${product.id})">
+
+              Add to Bag
+
+            </button>
+
+          </div>
+
+        </div>
+
+      `;
+
+    });
+
+  }
+
+
+  function filterMen(category, button) {
+
+    currentMenCategory = category;
+
+    document
+      .querySelectorAll(".filter-btn")
+      .forEach(btn =>
+        btn.classList.remove("active")
+      );
+
+    button.classList.add("active");
+
+    displayMenProducts();
+
+  }
+
+
+  function sortMenProducts() {
+
+    const value =
+      document.getElementById("sortSelect").value;
+
+    if (value === "low") {
+
+      menProducts.sort(
+        (a,b) => a.price - b.price
+      );
+
+    }
+
+    if (value === "high") {
+
+      menProducts.sort(
+        (a,b) => b.price - a.price
+      );
+
+    }
+
+    if (value === "name") {
+
+      menProducts.sort(
+        (a,b) =>
+          a.name.localeCompare(b.name)
+      );
+
+    }
+
+    displayMenProducts();
+
+  }
+
+
+  document
+    .getElementById("searchInput")
+    .addEventListener(
+      "input",
+      displayMenProducts
+    );
+
+
+  function scrollToProducts() {
+
+    document
+      .getElementById("products")
+      .scrollIntoView({
+        behavior: "smooth"
+      });
+
+  }
+
+
+  function addMenToCart(id) {
+
+    const product =
+      menProducts.find(
+        item => item.id === id
+      );
+
+    let cart =
+      JSON.parse(
+        localStorage.getItem("miniMartCart")
+      ) || [];
+
+    cart.push(product);
+
+    localStorage.setItem(
+      "miniMartCart",
+      JSON.stringify(cart)
+    );
+
+    alert(
+      product.name + " added to cart!"
+    );
+
+  }
+
+
+  displayMenProducts();
+
+</script>
+
+</body>
+  </html>
