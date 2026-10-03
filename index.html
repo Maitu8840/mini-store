@@ -572,6 +572,71 @@
 
 
   <script src="script.js"></script>
+<!-- CATEGORY PAGES -->
+<section id="categoryPages" style="display:none; padding:40px 20px;">
+    <button onclick="goHome()">← Back to Home</button>
 
+    <h1 id="categoryTitle"></h1>
+    <p id="categoryDescription"></p>
+
+    <div id="categoryProducts"
+         style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;">
+    </div>
+</section>
+
+<script>
+function openCategory(category) {
+    document.getElementById("categoryPages").style.display = "block";
+
+    const title = document.getElementById("categoryTitle");
+    const description = document.getElementById("categoryDescription");
+    const products = document.getElementById("categoryProducts");
+
+    products.innerHTML = "";
+
+    if (category === "man") {
+        title.innerText = "Man Collection";
+        description.innerText = "Explore our latest collection for Men.";
+    }
+
+    if (category === "woman") {
+        title.innerText = "Woman Collection";
+        description.innerText = "Explore our latest collection for Women.";
+    }
+
+    if (category === "children") {
+        title.innerText = "Children Collection";
+        description.innerText = "Explore our latest collection for Children.";
+    }
+
+    const items = [
+        {name:"Classic T-Shirt",price:"$25",category:"man"},
+        {name:"Casual Shirt",price:"$35",category:"man"},
+        {name:"Women Casual Top",price:"$30",category:"woman"},
+        {name:"Women Fashion Dress",price:"$45",category:"woman"},
+        {name:"Kids T-Shirt",price:"$20",category:"children"},
+        {name:"Kids Casual Dress",price:"$28",category:"children"}
+    ];
+
+    items.filter(item => item.category === category).forEach(item => {
+        products.innerHTML += `
+            <div style="border:1px solid #ddd;border-radius:12px;padding:20px;text-align:center;">
+                <h3>${item.name}</h3>
+                <p>${item.price}</p>
+                <button onclick="alert('Product added to bag!')">
+                    Add to Bag
+                </button>
+            </div>
+        `;
+    });
+
+    window.scrollTo(0,0);
+}
+
+function goHome() {
+    document.getElementById("categoryPages").style.display = "none";
+    window.scrollTo(0,0);
+}
+</script>
 </body>
         </html>
