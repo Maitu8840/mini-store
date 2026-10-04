@@ -239,208 +239,7 @@
   </footer>
 
 
-<script>
-const womenProducts = [
-    {
-        id: 201,
-        name: "Classic White Top",
-        category: "Tops",
-        price: 2520,
-        image: "https://images.unsplash.com/photo-1485968579580-b6d095142e6e?auto=format&fit=crop&w=600&q=80"
-    },
-
-    {
-        id: 202,
-        name: "Casual Summer Top",
-        category: "Tops",
-        price: 2880,
-        image: "https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?auto=format&fit=crop&w=600&q=80"
-    },
-
-    {
-        id: 203,
-        name: "Elegant Black Dress",
-        category: "Dresses",
-        price: 4950,
-        image: "https://images.unsplash.com/photo-1539008835657-9e8e9680c956?auto=format&fit=crop&w=600&q=80"
-    },
-
-    {
-        id: 204,
-        name: "Floral Summer Dress",
-        category: "Dresses",
-        price: 5580,
-        image: "https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=600&q=80"
-    },
-
-    {
-        id: 205,
-        name: "Blue Slim Jeans",
-        category: "Jeans",
-        price: 4680,
-        image: "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=600&q=80"
-    },
-
-    {
-        id: 206,
-        name: "High Waist Jeans",
-        category: "Jeans",
-        price: 5220,
-        image: "https://images.unsplash.com/photo-1584370848010-d7fe6bc767ec?auto=format&fit=crop&w=600&q=80"
-    },
-
-    {
-        id: 207,
-        name: "Classic Denim Jacket",
-        category: "Jackets",
-        price: 6120,
-        image: "https://images.unsplash.com/photo-1543076447-215ad9ba6923?auto=format&fit=crop&w=600&q=80"
-    },
-
-    {
-        id: 208,
-        name: "Elegant Winter Jacket",
-        category: "Jackets",
-        price: 7380,
-        image: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&w=600&q=80"
-    },
-
-    {
-        id: 209,
-        name: "White Fashion Sneakers",
-        category: "Shoes",
-        price: 5850,
-        image: "https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=600&q=80"
-    },
-
-    {
-        id: 210,
-        name: "Casual Beige Shoes",
-        category: "Shoes",
-        price: 6480,
-        image: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=600&q=80"
-    },
-
-    {
-        id: 211,
-        name: "Soft Knit Sweater",
-        category: "Tops",
-        price: 2250,
-        image: "https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?auto=format&fit=crop&w=600&q=80"
-    },
-
-    {
-        id: 212,
-        name: "Premium Cotton Blouse",
-        category: "Tops",
-        price: 2880,
-        image: "https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3?auto=format&fit=crop&w=600&q=80"
-    },
-
-    {
-        id: 213,
-        name: "Pink Party Dress",
-        category: "Dresses",
-        price: 4050,
-        image: "https://images.unsplash.com/photo-1566174053879-31528523f8ae?auto=format&fit=crop&w=600&q=80"
-    },
-
-    {
-        id: 214,
-        name: "Floral Midi Dress",
-        category: "Dresses",
-        price: 4680,
-        image: "https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=600&q=80"
-    },
-
-    {
-        id: 215,
-        name: "Black Straight Jeans",
-        category: "Jeans",
-        price: 3780,
-        image: "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=600&q=80"
-    },
-
-    {
-        id: 216,
-        name: "Light Blue Mom Jeans",
-        category: "Jeans",
-        price: 4230,
-        image: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?auto=format&fit=crop&w=600&q=80"
-    },
-
-    {
-        id: 217,
-        name: "Cropped Denim Jacket",
-        category: "Jackets",
-        price: 4950,
-        image: "https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=600&q=80"
-    },
-
-    {
-        id: 218,
-        name: "Classic Black Blazer",
-        category: "Jackets",
-        price: 5850,
-        image: "https://images.unsplash.com/photo-1591369822096-ffd140ec948f?auto=format&fit=crop&w=600&q=80"
-    },
-
-    {
-        id: 219,
-        name: "White Casual Sneakers",
-        category: "Shoes",
-        price: 3510,
-        image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=600&q=80"
-    },
-
-    {
-        id: 220,
-        name: "Women's Running Shoes",
-        category: "Shoes",
-        price: 4590,
-        image: "https://images.unsplash.com/photo-1551107696-a4b0c5a0d9a2?auto=format&fit=crop&w=600&q=80"
-    }
-
-];
-
-  let currentWomenCategory = "All";
-
-
-  function displayWomenProducts() {
-
-    const grid =
-      document.getElementById("womenProductGrid");
-
-    const search =
-      document
-        .getElementById("searchInput")
-        .value
-        .toLowerCase();
-
-    let products =
-      womenProducts.filter(product => {
-
-        const categoryMatch =
-          currentWomenCategory === "All" ||
-          product.category === currentWomenCategory;
-
-        const searchMatch =
-          product.name
-            .toLowerCase()
-            .includes(search);
-
-        return categoryMatch && searchMatch;
-
-      });
-
-
-    grid.innerHTML = "";
-
-
-    products.forEach(product => {
-
-      grid.innerHTML += `
-
+        id: 
         <div class="product-card">
 
           <div class="product-image">
@@ -489,106 +288,319 @@ const womenProducts = [
     });
 
   }
+<script>
 
-
-  function filterWomen(category, button) {
-
-    currentWomenCategory = category;
-
-    document
-      .querySelectorAll(".filter-btn")
-      .forEach(btn =>
-        btn.classList.remove("active")
-      );
-
-    button.classList.add("active");
-
-    displayWomenProducts();
-
+const womenProducts = [
+  {
+    id: 201,
+    name: "Classic White Top",
+    category: "Tops",
+    price: 2520,
+    image: "https://images.unsplash.com/photo-1485968579580-b6d095142e6e?auto=format&fit=crop&w=600&q=80"
+  },
+  {
+    id: 202,
+    name: "Casual Summer Top",
+    category: "Tops",
+    price: 2880,
+    image: "https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?auto=format&fit=crop&w=600&q=80"
+  },
+  {
+    id: 203,
+    name: "Elegant Black Dress",
+    category: "Dresses",
+    price: 4950,
+    image: "https://images.unsplash.com/photo-1539008835657-9e8e9680c956?auto=format&fit=crop&w=600&q=80"
+  },
+  {
+    id: 204,
+    name: "Floral Summer Dress",
+    category: "Dresses",
+    price: 5580,
+    image: "https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=600&q=80"
+  },
+  {
+    id: 205,
+    name: "Blue Slim Jeans",
+    category: "Jeans",
+    price: 4680,
+    image: "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=600&q=80"
+  },
+  {
+    id: 206,
+    name: "High Waist Jeans",
+    category: "Jeans",
+    price: 5220,
+    image: "https://images.unsplash.com/photo-1584370848010-d7fe6bc767ec?auto=format&fit=crop&w=600&q=80"
+  },
+  {
+    id: 207,
+    name: "Classic Denim Jacket",
+    category: "Jackets",
+    price: 6120,
+    image: "https://images.unsplash.com/photo-1543076447-215ad9ba6923?auto=format&fit=crop&w=600&q=80"
+  },
+  {
+    id: 208,
+    name: "Elegant Winter Jacket",
+    category: "Jackets",
+    price: 7380,
+    image: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&w=600&q=80"
+  },
+  {
+    id: 209,
+    name: "White Fashion Sneakers",
+    category: "Shoes",
+    price: 5850,
+    image: "https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=600&q=80"
+  },
+  {
+    id: 210,
+    name: "Casual Beige Shoes",
+    category: "Shoes",
+    price: 6480,
+    image: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=600&q=80"
+  },
+  {
+    id: 211,
+    name: "Soft Knit Sweater",
+    category: "Tops",
+    price: 2250,
+    image: "https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?auto=format&fit=crop&w=600&q=80"
+  },
+  {
+    id: 212,
+    name: "Premium Cotton Blouse",
+    category: "Tops",
+    price: 2880,
+    image: "https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3?auto=format&fit=crop&w=600&q=80"
+  },
+  {
+    id: 213,
+    name: "Pink Party Dress",
+    category: "Dresses",
+    price: 4050,
+    image: "https://images.unsplash.com/photo-1566174053879-31528523f8ae?auto=format&fit=crop&w=600&q=80"
+  },
+  {
+    id: 214,
+    name: "Floral Midi Dress",
+    category: "Dresses",
+    price: 4680,
+    image: "https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=600&q=80"
+  },
+  {
+    id: 215,
+    name: "Black Straight Jeans",
+    category: "Jeans",
+    price: 3780,
+    image: "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=600&q=80"
+  },
+  {
+    id: 216,
+    name: "Light Blue Mom Jeans",
+    category: "Jeans",
+    price: 4230,
+    image: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?auto=format&fit=crop&w=600&q=80"
+  },
+  {
+    id: 217,
+    name: "Cropped Denim Jacket",
+    category: "Jackets",
+    price: 4950,
+    image: "https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=600&q=80"
+  },
+  {
+    id: 218,
+    name: "Classic Black Blazer",
+    category: "Jackets",
+    price: 5850,
+    image: "https://images.unsplash.com/photo-1591369822096-ffd140ec948f?auto=format&fit=crop&w=600&q=80"
+  },
+  {
+    id: 219,
+    name: "White Casual Sneakers",
+    category: "Shoes",
+    price: 3510,
+    image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=600&q=80"
+  },
+  {
+    id: 220,
+    name: "Women's Running Shoes",
+    category: "Shoes",
+    price: 4590,
+    image: "https://images.unsplash.com/photo-1551107696-a4b0c5a0d9a2?auto=format&fit=crop&w=600&q=80"
   }
+];
+
+let currentWomenCategory = "All";
+
+function displayWomenProducts() {
+
+  const grid = document.getElementById("womenProductGrid");
+
+  if (!grid) return;
+
+  const searchInput = document.getElementById("searchInput");
+
+  const search = searchInput
+    ? searchInput.value.toLowerCase()
+    : "";
+
+  let products = womenProducts.filter(product => {
+
+    const categoryMatch =
+      currentWomenCategory === "All" ||
+      product.category === currentWomenCategory;
+
+    const searchMatch =
+      product.name.toLowerCase().includes(search);
+
+    return categoryMatch && searchMatch;
+  });
+
+  grid.innerHTML = "";
+
+  products.forEach(product => {
+
+    grid.innerHTML += `
+      <div class="product-card">
+
+        <div class="product-image">
+
+          <img
+            src="${product.image}"
+            alt="${product.name}"
+            style="
+              width:100%;
+              height:300px;
+              object-fit:cover;
+            "
+          >
+
+        </div>
+
+        <div class="product-info">
+
+          <span class="small-title">
+            ${product.category}
+          </span>
+
+          <h3>${product.name}</h3>
+
+          <strong>₹${product.price}</strong>
+
+          <br>
+
+          <button
+            class="primary-btn"
+            style="margin-top:12px;"
+            onclick="addWomenToCart(${product.id})"
+          >
+            Add to Bag
+          </button>
+
+        </div>
+
+      </div>
+    `;
+  });
+}
 
 
-  function sortWomenProducts() {
+function filterWomen(category, button) {
 
-    const value =
-      document.getElementById("sortSelect").value;
-
-    if (value === "low") {
-
-      womenProducts.sort(
-        (a, b) => a.price - b.price
-      );
-
-    }
-
-    if (value === "high") {
-
-      womenProducts.sort(
-        (a, b) => b.price - a.price
-      );
-
-    }
-
-    if (value === "name") {
-
-      womenProducts.sort(
-        (a, b) =>
-          a.name.localeCompare(b.name)
-      );
-
-    }
-
-    displayWomenProducts();
-
-  }
-
+  currentWomenCategory = category;
 
   document
-    .getElementById("searchInput")
-    .addEventListener(
-      "input",
-      displayWomenProducts
-    );
+    .querySelectorAll(".filter-btn")
+    .forEach(btn => {
+      btn.classList.remove("active");
+    });
 
-
-  function scrollToProducts() {
-
-    document
-      .getElementById("products")
-      .scrollIntoView({
-        behavior: "smooth"
-      });
-
+  if (button) {
+    button.classList.add("active");
   }
-
-
-  function addWomenToCart(id) {
-
-    const product =
-      womenProducts.find(
-        item => item.id === id
-      );
-
-    let cart =
-      JSON.parse(
-        localStorage.getItem("miniMartCart")
-      ) || [];
-
-    cart.push(product);
-
-    localStorage.setItem(
-      "miniMartCart",
-      JSON.stringify(cart)
-    );
-
-    alert(
-      product.name + " added to cart!"
-    );
-
-  }
-
 
   displayWomenProducts();
+}
+
+
+function sortWomenProducts() {
+
+  const select = document.getElementById("sortSelect");
+
+  if (!select) return;
+
+  const value = select.value;
+
+  if (value === "low") {
+    womenProducts.sort((a, b) => a.price - b.price);
+  }
+
+  if (value === "high") {
+    womenProducts.sort((a, b) => b.price - a.price);
+  }
+
+  if (value === "name") {
+    womenProducts.sort((a, b) =>
+      a.name.localeCompare(b.name)
+    );
+  }
+
+  displayWomenProducts();
+}
+
+
+function scrollToProducts() {
+
+  const products = document.getElementById("products");
+
+  if (products) {
+    products.scrollIntoView({
+      behavior: "smooth"
+    });
+  }
+}
+
+
+function addWomenToCart(id) {
+
+  const product = womenProducts.find(
+    item => item.id === id
+  );
+
+  if (!product) return;
+
+  let cart = JSON.parse(
+    localStorage.getItem("miniMartCart")
+  ) || [];
+
+  cart.push(product);
+
+  localStorage.setItem(
+    "miniMartCart",
+    JSON.stringify(cart)
+  );
+
+  alert(product.name + " added to cart!");
+}
+
+
+const searchInput = document.getElementById("searchInput");
+
+if (searchInput) {
+  searchInput.addEventListener(
+    "input",
+    displayWomenProducts
+  );
+}
+
+
+displayWomenProducts();
+
+</script>
+    
 
 </script>
 
