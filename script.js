@@ -670,12 +670,16 @@ async function placeOrder(event) {
     updateCart();
     closeCheckout();
 
-    /* SHOW PAYMENT SUCCESS */
-    showPaymentSuccess(
-      data.order,
-      total,
-      paymentMethod
-    );
+    if (paymentMethod === "COD") {
+  showToast("Order placed successfully! Pay on delivery.");
+  openOrders();
+} else {
+  showPaymentSuccess(
+    data.order,
+    total,
+    paymentMethod
+  );
+    }
 
     document
       .getElementById("checkoutForm")
