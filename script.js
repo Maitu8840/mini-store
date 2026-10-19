@@ -287,7 +287,7 @@ function updateCart() {
       </div>
     `;
 
-    subtotalElement.textContent = "$0.00";
+    subtotalElement.textContent = "₹0.00";
     return;
   }
 
@@ -348,8 +348,8 @@ function updateCart() {
     `;
   }).join("");
 
-  subtotalElement.textContent =
-    "$" + subtotal.toFixed(2);
+subtotalElement.textContent =
+    "₹" + subtotal.toFixed(2);
 }
 
 function changeQuantity(id, amount) {
@@ -524,7 +524,7 @@ function openCheckout() {
     itemCount;
 
   document.getElementById("checkoutTotal").textContent =
-    "$" + total.toFixed(2);
+    "₹" + total.toFixed(2);
 
   document
     .getElementById("checkoutModal")
