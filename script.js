@@ -142,7 +142,7 @@ function renderProducts() {
           <div class="product-bottom">
 
             <span class="price">
-              $${product.price.toFixed(2)}
+              ₹${product.price.toFixed(2)}
             </span>
 
             <button
@@ -319,7 +319,7 @@ function updateCart() {
           <h4>${product.name}</h4>
 
           <div class="cart-price">
-            $${product.price.toFixed(2)}
+            ₹${product.price.toFixed(2)}
           </div>
 
           <button
