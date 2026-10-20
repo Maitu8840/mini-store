@@ -782,7 +782,7 @@ function showPaymentSuccess(
 
         <p>
           <strong>💰 Total Amount:</strong>
-          $${Number(total).toFixed(2)}
+          ₹${Number(total).toFixed(2)}
         </p>
 
         <p>
@@ -932,7 +932,7 @@ function showPaymentDetails() {
 
         <p>
           <strong>💰 Amount Paid:</strong>
-          $${total.toFixed(2)}
+          ₹${total.toFixed(2)}
         </p>
 
         <p>
