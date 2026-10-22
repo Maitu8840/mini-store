@@ -629,7 +629,7 @@ async function placeOrder(event) {
           items: orderItems,
           customer: customer,
           paymentMethod: paymentMethod,
-          paymentStatus: "Paid",
+          paymentStatus: paymentMethod === "COD" ? "Pending" : "Paid",
           total: total
         })
       }
@@ -752,7 +752,7 @@ function showPaymentSuccess(
       </div>
 
       <h2>
-        Payment Successful
+    ${paymentMethod === "COD" ? "Order Successful" : "Payment Successful"}
       </h2>
 
       <p style="
